@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "455410462566",
+    "project_id": "appcancerpiel-fd79b",
+    "storage_bucket": "appcancerpiel-fd79b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:455410462566:android:91dfdbd659b5b8b657e2a7",
+        "android_client_info": {
+          "package_name": "com.example.appcancerpiel"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaIcOnPdgJcKHVnKw7VgX48tWIWGpGUTU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

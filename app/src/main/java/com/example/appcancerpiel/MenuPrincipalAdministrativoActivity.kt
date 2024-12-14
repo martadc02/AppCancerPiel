@@ -12,6 +12,7 @@ class MenuPrincipalAdministrativoActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_menu_principal_administrativo)
 
+
         val btnListadoPaciente = findViewById<Button>(R.id.btn_listado_paciente)
         val btnRegistroPaciente = findViewById<Button>(R.id.btn_registro_paciente)
         val btnRegistrarMedicos = findViewById<Button>(R.id.btn_registrar_medicos)

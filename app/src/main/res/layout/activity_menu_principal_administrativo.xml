@@ -8,7 +8,6 @@
     android:layout_height="match_parent"
     tools:context=".MenuPrincipalAdministrativoActivity">
 
-    <!-- Botón para Listado Paciente -->
     <Button
         android:id="@+id/btn_listado_paciente"
         android:layout_width="0dp"
@@ -20,7 +19,6 @@
         android:layout_marginTop="32dp"
         android:layout_marginHorizontal="16dp" />
 
-    <!-- Botón para Registro Paciente -->
     <Button
         android:id="@+id/btn_registro_paciente"
         android:layout_width="0dp"
@@ -32,7 +30,6 @@
         android:layout_marginTop="16dp"
         android:layout_marginHorizontal="16dp" />
 
-    <!-- Botón para Registrar Médicos -->
     <Button
         android:id="@+id/btn_registrar_medicos"
         android:layout_width="0dp"
@@ -44,7 +41,6 @@
         android:layout_marginTop="16dp"
         android:layout_marginHorizontal="16dp" />
 
-    <!-- Botón para Cerrar Sesión -->
     <Button
         android:id="@+id/btn_cerrar_sesion"
         android:layout_width="0dp"

@@ -2,4 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="blue">#4FB5FE</color>
+    <color name="amarillo">#fff7ab</color>
+    <color name="naranja">#ffbd5d</color>
+    <color name="rosa_claro">#F8BBD0</color>
+    <color name="rosa_oscuro">#F48FB1</color>
+    <color name="morado_claro">#eab9fd</color>
+    <color name="morado_oscuro">#dc88fe</color>
 </resources>

@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeAdminActivity">
+    tools:context=".HomeMedicoActivity">
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="247dp"
-        android:layout_height="91dp"
-        android:text="Administrador"
+        android:id="@+id/button3"
+        android:layout_width="213dp"
+        android:layout_height="76dp"
+        android:text="Médico"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

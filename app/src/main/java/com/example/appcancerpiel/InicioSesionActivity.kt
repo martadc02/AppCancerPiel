@@ -62,10 +62,10 @@ class InicioSesionActivity : AppCompatActivity() {
             if(it.exists()){
                 startActivity(Intent(this, HomeAdminActivity::class.java))
             }
-            //else {
-            //    startActivity(Intent(this, HomePaciente::class.java))
+            else {
+                startActivity(Intent(this, HomeMedicoActivity::class.java))
 
-            //}
+            }
 
         }
 

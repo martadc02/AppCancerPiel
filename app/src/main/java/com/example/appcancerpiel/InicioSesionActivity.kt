@@ -79,7 +79,6 @@ class InicioSesionActivity : AppCompatActivity() {
             .setPositiveButton("ACEPTAR", null)
         val dialog: AlertDialog = builder.create()
         dialog.show()
-
     }
 
     fun onClickTipo(v: View?){

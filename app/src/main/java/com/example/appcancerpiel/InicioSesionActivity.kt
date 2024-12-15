@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -35,21 +36,21 @@ class InicioSesionActivity : AppCompatActivity() {
     fun setup() {
         // Aquí pondremos la lógica de los botones de autenticación
 
-        btnAcceder.setOnClickListener {
-            if (email.text.isNotBlank() && passwd.text.isNotBlank()) {
+        btnAcceder.setOnClickListener{
+            if(email.text.isNotBlank()&& passwd.text.isNotBlank()){
                 auth.signInWithEmailAndPassword(
                     email.text.toString(),
                     passwd.text.toString()
-
-                ).addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
+                ).addOnCompleteListener{task ->
+                    if(task.isSuccessful){
                         Log.i("INFO", "Usuario logueado correctamente")
                         showHome(email.text.toString())
                         email.text.clear()
                         passwd.text.clear()
-                    } else {
-                        Alert.showAlert(this, "Error logueando al usuario")
+                    }else{
+                        showAlert("Error logueando el usuario")
                     }
+
                 }
             }
         }
@@ -57,11 +58,27 @@ class InicioSesionActivity : AppCompatActivity() {
 
     private fun showHome(email: String){
         //startActivity(Intent(this, HomePaciente::class.java))
-        Firebase.firestore.document(email).get().addOnSuccessListener {
-            if (it.exists()) {
+        Firebase.firestore.collection("Administrador").document(email).get().addOnSuccessListener {
+            if(it.exists()){
                 startActivity(Intent(this, HomeAdminActivity::class.java))
             }
+            //else {
+            //    startActivity(Intent(this, HomePaciente::class.java))
+
+            //}
+
         }
+
+    }
+
+    private fun showAlert(text:String){
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+        builder
+            .setMessage(text)
+            .setTitle("Error")
+            .setPositiveButton("ACEPTAR", null)
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
 
     }
 

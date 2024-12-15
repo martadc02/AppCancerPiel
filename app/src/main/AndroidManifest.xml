@@ -13,16 +13,16 @@
         android:theme="@style/Theme.AppCancerPiel"
         tools:targetApi="31">
         <activity
-            android:name=".RegistrarMedicosActivity"
+            android:name=".HomeMedicoActivity"
             android:exported="false" />
         <activity
-            android:name=".RegistroPacienteActivity"
+            android:name=".HomeAdminActivity"
             android:exported="false" />
         <activity
-            android:name=".ListadoPacientesActivity"
+            android:name=".InicioSesionActivity"
             android:exported="false" />
         <activity
-            android:name=".MenuPrincipalAdministrativoActivity"
+            android:name=".TipoActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

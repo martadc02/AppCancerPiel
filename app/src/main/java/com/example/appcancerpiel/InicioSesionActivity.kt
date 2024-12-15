@@ -56,20 +56,45 @@ class InicioSesionActivity : AppCompatActivity() {
         }
     }
 
-    private fun showHome(email: String){
-        //startActivity(Intent(this, HomePaciente::class.java))
-        Firebase.firestore.collection("Administrador").document(email).get().addOnSuccessListener {
-            if(it.exists()){
-                startActivity(Intent(this, HomeAdminActivity::class.java))
-            }
-            else {
-                startActivity(Intent(this, HomeMedicoActivity::class.java))
+    private fun showHome(email: String) {
+        val cleanEmail = email.trim() // Elimina espacios en blanco al inicio y final
+        val db = Firebase.firestore
 
-            }
-
+        // Verificar si el usuario está autenticado
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        if (currentUser != null) {
+            Log.i("AUTH", "Usuario autenticado: ${currentUser.email}")
+        } else {
+            Log.e("AUTH", "Error: Usuario no autenticado")
+            showAlert("Error: Usuario no autenticado")
+            return
         }
 
+        // Consulta en Firestore: buscar en "Administrador" donde el campo "email" coincida
+        db.collection("Administrador")
+            .whereEqualTo("email", cleanEmail)
+            .get()
+            .addOnSuccessListener { documents ->
+                if (!documents.isEmpty) {
+                    // Si el email existe en la colección, redirigir a HomeAdminActivity
+                    startActivity(Intent(this, HomeAdminActivity::class.java))
+                    Log.i("INFO", "Usuario identificado como Administrador")
+                } else {
+                    // Si no existe, redirigir a HomeMedicoActivity
+                    startActivity(Intent(this, HomeMedicoActivity::class.java))
+                    Log.i("INFO", "Usuario redirigido a HomeMedicoActivity")
+                }
+            }
+            .addOnFailureListener { exception ->
+                // Manejar errores al consultar Firestore
+                showAlert("Error al verificar permisos: ${exception.message}")
+                Log.e("ERROR", "Error al consultar Firestore: ", exception)
+            }
     }
+
+
+
+
 
     private fun showAlert(text:String){
         val builder: AlertDialog.Builder = AlertDialog.Builder(this)

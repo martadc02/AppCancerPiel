@@ -77,7 +77,7 @@ class InicioSesionActivity : AppCompatActivity() {
             .addOnSuccessListener { documents ->
                 if (!documents.isEmpty) {
                     // Si el email existe en la colección, redirigir a HomeAdminActivity
-                    startActivity(Intent(this, HomeAdminActivity::class.java))
+                    startActivity(Intent(this, MenuPrincipalAdministrativoActivity::class.java))
                     Log.i("INFO", "Usuario identificado como Administrador")
                 } else {
                     // Si no existe, redirigir a HomeMedicoActivity

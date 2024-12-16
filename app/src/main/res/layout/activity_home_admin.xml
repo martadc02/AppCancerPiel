@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".HomeAdminActivity">
 
     <!-- Barra azul lateral -->
@@ -33,8 +33,8 @@
     <!-- Botón "Listado de pacientes" -->
     <Button
         android:id="@+id/btn_listado_paciente"
-        android:layout_width="250dp"
-        android:layout_height="80dp"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
         android:text="Listado de pacientes"
         android:textSize="16sp"
         android:textColor="@android:color/white"
@@ -48,8 +48,8 @@
     <!-- Botón "Registro de paciente" -->
     <Button
         android:id="@+id/btn_registro_paciente"
-        android:layout_width="250dp"
-        android:layout_height="80dp"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
         android:text="Registro de paciente"
         android:textSize="16sp"
         android:textColor="@android:color/white"
@@ -63,8 +63,8 @@
     <!-- Botón "Registrar Médicos" -->
     <Button
         android:id="@+id/btn_registrar_medicos"
-        android:layout_width="250dp"
-        android:layout_height="80dp"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
         android:text="Registrar Médicos"
         android:textSize="16sp"
         android:textColor="@android:color/white"
@@ -78,8 +78,8 @@
     <!-- Botón "Cerrar Sesión" -->
     <Button
         android:id="@+id/btn_cerrar_sesion"
-        android:layout_width="250dp"
-        android:layout_height="80dp"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
         android:text="Cerrar Sesión"
         android:textSize="16sp"
         android:textColor="@android:color/white"

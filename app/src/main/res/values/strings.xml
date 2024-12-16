@@ -12,4 +12,5 @@
     <string name="none">N/C</string>
     <string name="male">Hombre</string>
     <string name="female">Mujer</string>
+    <string name="men_principal">Menú Principal</string>
 </resources>

@@ -20,7 +20,7 @@
         android:id="@+id/textViewHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Menú Principal"
+        android:text="Menú principal"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="@android:color/black"

@@ -1,59 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:onClick="onClick"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".HomeAdminActivity">
 
+    <!-- Barra azul lateral -->
+    <View
+        android:id="@+id/barraAzul"
+        android:layout_width="50dp"
+        android:layout_height="0dp"
+        android:background="#0099FF"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- Encabezado "Menú Principal" -->
+    <TextView
+        android:id="@+id/textViewHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Menú Principal"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_margin="32dp" />
+
+    <!-- Botón "Listado de pacientes" -->
     <Button
         android:id="@+id/btn_listado_paciente"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="32dp"
-        android:onClick="onClick"
-        android:text="Listado Paciente"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
+        android:text="Listado de pacientes"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:backgroundTint="#0078D7"
+        app:layout_constraintTop_toBottomOf="@id/textViewHeader"
+        app:layout_constraintTop_margin="32dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.7" />
 
+    <!-- Botón "Registro de paciente" -->
     <Button
         android:id="@+id/btn_registro_paciente"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        android:onClick="onClick"
-        android:text="Registro Paciente"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
+        android:text="Registro de paciente"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:backgroundTint="#0078D7"
+        app:layout_constraintTop_toBottomOf="@id/btn_listado_paciente"
+        app:layout_constraintTop_margin="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_listado_paciente" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.7" />
 
+    <!-- Botón "Registrar Médicos" -->
     <Button
         android:id="@+id/btn_registrar_medicos"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        android:onClick="onClick"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
         android:text="Registrar Médicos"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:backgroundTint="#0078D7"
+        app:layout_constraintTop_toBottomOf="@id/btn_registro_paciente"
+        app:layout_constraintTop_margin="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_registro_paciente" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.7" />
 
+    <!-- Botón "Cerrar Sesión" -->
     <Button
         android:id="@+id/btn_cerrar_sesion"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        android:onClick="onClick"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
         android:text="Cerrar Sesión"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:backgroundTint="#0078D7"
+        app:layout_constraintTop_toBottomOf="@id/btn_registrar_medicos"
+        app:layout_constraintTop_margin="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_registrar_medicos" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.7" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

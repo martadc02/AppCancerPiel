@@ -9,44 +9,38 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.TextView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.Firebase
-import com.google.firebase.Timestamp
-import com.google.firebase.auth.auth
-import com.google.firebase.firestore.firestore
-import com.example.appcancerpiel.modelo.Alert
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
-import java.text.SimpleDateFormat
-import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.firestore
 
 class RegistroPacienteActivity : AppCompatActivity() {
 
-    private lateinit var btnRegistro : Button
+    private lateinit var btnRegistro: Button
     private lateinit var auth: FirebaseAuth
 
     private lateinit var telefono: EditText
     private lateinit var letreroSex: TextView
     private lateinit var email: EditText
-    private lateinit var fechaNac : EditText
-    private lateinit var nombre : EditText
-    private lateinit var apellidos : EditText
-    private lateinit var dni : EditText
-    private lateinit var gruposexo : RadioGroup
+    private lateinit var fechaNac: EditText
+    private lateinit var nombre: EditText
+    private lateinit var apellidos: EditText
+    private lateinit var dni: EditText
+    private lateinit var gruposexo: RadioGroup
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registro_paciente)
 
+        // Inicialización de los componentes
         btnRegistro = findViewById(R.id.botonRegistro)
-        auth = com.google.firebase.ktx.Firebase.auth
+        auth = FirebaseAuth.getInstance()
+
 
         telefono = findViewById(R.id.editTextPhone)
-        letreroSex= findViewById(R.id.textViewSex)
+        letreroSex = findViewById(R.id.textViewSex)
         email = findViewById(R.id.correoinfopersonal)
         nombre = findViewById(R.id.nombreinfopersonal)
         apellidos = findViewById(R.id.apellidosinfopersonal)
@@ -55,37 +49,39 @@ class RegistroPacienteActivity : AppCompatActivity() {
         gruposexo = findViewById(R.id.radioGroupsexo)
 
         setup()
-
     }
 
-    fun setup() {
+    private fun setup() {
         btnRegistro.setOnClickListener {
-            // Validar campos
+            // Validar campos obligatorios
             if (email.text.isBlank() || nombre.text.isBlank() || apellidos.text.isBlank() ||
                 fechaNac.text.isBlank() || telefono.text.isBlank() || dni.text.isBlank()
             ) {
-                Alert.showAlert(this, "Por favor, complete todos los campos")
+                showAlert("Por favor, complete todos los campos")
                 return@setOnClickListener
             }
 
+            // Validar formato de email
             if (!Patterns.EMAIL_ADDRESS.matcher(email.text.toString()).matches()) {
-                Alert.showAlert(this, "Por favor, ingrese un correo electrónico válido")
+                showAlert("Por favor, ingrese un correo electrónico válido")
                 return@setOnClickListener
             }
 
+            // Validar formato de DNI
             if (!dni.text.toString().matches(Regex("\\d{8}[A-HJ-NP-TV-Z]"))) {
-                Alert.showAlert(this, "Por favor, ingrese un DNI válido")
+                showAlert("Por favor, ingrese un DNI válido")
                 return@setOnClickListener
             }
 
-            // Intentar registrar al usuario
+            // Registrar el usuario en Firebase Authentication
             auth.createUserWithEmailAndPassword(
                 email.text.toString(),
-                "defaultPassword123"
+                "defaultPassword123" // Contraseña por defecto
             ).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val currentUser = auth.currentUser
                     if (currentUser != null) {
+                        // Datos del paciente
                         val paciente = hashMapOf(
                             "nombre" to nombre.text.toString(),
                             "apellidos" to apellidos.text.toString(),
@@ -99,15 +95,18 @@ class RegistroPacienteActivity : AppCompatActivity() {
                             },
                             "email" to email.text.toString()
                         )
+
+                        // Guardar en Firestore
                         val db = Firebase.firestore
                         db.collection("Pacientes").document(currentUser.uid)
                             .set(paciente)
                             .addOnSuccessListener {
                                 Log.i("INFO", "Información del paciente registrada correctamente")
+                                showSuccessDialog()
                             }
                             .addOnFailureListener { e ->
                                 Log.e("ERROR", "Error al registrar información del paciente", e)
-                                Alert.showAlert(this, "Error al guardar la información del paciente")
+                                showAlert("Error al guardar la información del paciente")
                             }
                     }
                 } else {
@@ -116,19 +115,45 @@ class RegistroPacienteActivity : AppCompatActivity() {
                         else -> task.exception?.localizedMessage ?: "Error desconocido"
                     }
                     Log.e("ERROR", "Error al registrar usuario: $errorMessage", task.exception)
-                    Alert.showAlert(this, errorMessage)
+                    showAlert(errorMessage)
                 }
             }
         }
     }
 
-    fun onClickVolver(v: View?){
-        when(v?.id){
-            R.id.botonVolver -> {
-                intent = Intent(this, HomeAdminActivity::class.java)
+    // Mostrar un mensaje de éxito y redirigir
+    private fun showSuccessDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Registro exitoso")
+            .setMessage("El paciente se ha registrado correctamente.")
+            .setPositiveButton("Aceptar") { _, _ ->
+                // Redirigir a la página principal del administrador
+                val intent = Intent(this, HomeAdminActivity::class.java)
                 startActivity(intent)
+                finish()
+            }
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+    }
+
+    // Mostrar alerta de error
+    private fun showAlert(message: String) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Error")
+            .setMessage(message)
+            .setPositiveButton("Aceptar", null)
+        val dialog: AlertDialog = builder.create()
+        dialog.show()
+    }
+
+    // Botón para volver a la página principal del administrador
+    fun onClickVolver(v: View?) {
+        when (v?.id) {
+            R.id.botonVolver -> {
+                val intent = Intent(this, HomeAdminActivity::class.java)
+                startActivity(intent)
+                finish()
             }
         }
     }
-
 }

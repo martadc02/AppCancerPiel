@@ -11,7 +11,6 @@ import androidx.appcompat.app.AlertDialog
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.example.appcancerpiel.modelo.Alert
 import com.google.firebase.firestore.ktx.firestore
 
 class InicioSesionActivity : AppCompatActivity() {

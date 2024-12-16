@@ -27,7 +27,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_margin="32dp" />
+        android:layout_marginTop="32dp" />
 
     <!-- Botón "Listado de pacientes" -->
     <Button
@@ -39,7 +39,8 @@
         android:backgroundTint="#0078D7"
         android:textColor="@android:color/white"
         app:layout_constraintTop_toBottomOf="@id/textViewHeader"
-        app:layout_constraintTop_margin="32dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

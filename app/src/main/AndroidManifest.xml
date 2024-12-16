@@ -25,6 +25,15 @@
             android:name=".TipoActivity"
             android:exported="false" />
         <activity
+            android:name=".RegistrarMedicosActivity"
+            android:exported="true" />
+        <activity
+            android:name=".RegistroPacienteActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ListadoPacientesActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

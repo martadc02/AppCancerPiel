@@ -3,4 +3,13 @@
 
     <string name="email">Correo electrónico</string>
     <string name="contraseña">Contraseña</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellido">Apellidos</string>
+    <string name="cumpleaños">Fecha de nacimiento</string>
+    <string name="telf">Número de teléfono</string>
+    <string name="sexo">Sexo</string>
+
+    <string name="none">N/C</string>
+    <string name="male">Hombre</string>
+    <string name="female">Mujer</string>
 </resources>

@@ -19,6 +19,7 @@ class InicioSesionActivity : AppCompatActivity() {
     private lateinit var passwd: EditText
     private lateinit var auth: FirebaseAuth
     private lateinit var btnAcceder: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inicio_sesion)
@@ -32,82 +33,92 @@ class InicioSesionActivity : AppCompatActivity() {
         setup()
     }
 
-    fun setup() {
-        // Aquí pondremos la lógica de los botones de autenticación
+    private fun setup() {
+        // Lógica de autenticación
+        btnAcceder.setOnClickListener {
+            val emailInput = email.text.toString().trim()
+            val passwordInput = passwd.text.toString().trim()
 
-        btnAcceder.setOnClickListener{
-            if(email.text.isNotBlank()&& passwd.text.isNotBlank()){
-                auth.signInWithEmailAndPassword(
-                    email.text.toString(),
-                    passwd.text.toString()
-                ).addOnCompleteListener{task ->
-                    if(task.isSuccessful){
-                        Log.i("INFO", "Usuario logueado correctamente")
-                        showHome(email.text.toString())
-                        email.text.clear()
-                        passwd.text.clear()
-                    }else{
-                        showAlert("Error logueando el usuario")
+            if (emailInput.isNotBlank() && passwordInput.isNotBlank()) {
+                auth.signInWithEmailAndPassword(emailInput, passwordInput)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Log.i("INFO", "Usuario logueado correctamente")
+                            showHome(emailInput)
+                            email.text.clear()
+                            passwd.text.clear()
+                        } else {
+                            showAlert("Error logueando el usuario: ${task.exception?.localizedMessage}")
+                        }
                     }
-
-                }
+            } else {
+                showAlert("Por favor, completa todos los campos")
             }
         }
     }
 
     private fun showHome(email: String) {
-        val cleanEmail = email.trim() // Elimina espacios en blanco al inicio y final
+        val cleanEmail = email.trim()
         val db = Firebase.firestore
 
-        // Verificar si el usuario está autenticado
         val currentUser = FirebaseAuth.getInstance().currentUser
-        if (currentUser != null) {
-            Log.i("AUTH", "Usuario autenticado: ${currentUser.email}")
-        } else {
+        if (currentUser == null) {
             Log.e("AUTH", "Error: Usuario no autenticado")
             showAlert("Error: Usuario no autenticado")
             return
         }
 
-        // Consulta en Firestore: buscar en "Administrador" donde el campo "email" coincida
+        // Verificar si es Administrador
         db.collection("Administrador")
             .whereEqualTo("email", cleanEmail)
             .get()
             .addOnSuccessListener { documents ->
                 if (!documents.isEmpty) {
-                    // Si el email existe en la colección, redirigir a HomeAdminActivity
                     startActivity(Intent(this, HomeAdminActivity::class.java))
                     Log.i("INFO", "Usuario identificado como Administrador")
                 } else {
-                    // Si no existe, redirigir a HomeMedicoActivity
-                    startActivity(Intent(this, HomeMedicoActivity::class.java))
-                    Log.i("INFO", "Usuario redirigido a HomeMedicoActivity")
+                    // Verificar si es Médico si no es Administrador
+                    verificarMedico(cleanEmail)
                 }
             }
             .addOnFailureListener { exception ->
-                // Manejar errores al consultar Firestore
                 showAlert("Error al verificar permisos: ${exception.message}")
                 Log.e("ERROR", "Error al consultar Firestore: ", exception)
             }
     }
 
+    private fun verificarMedico(email: String) {
+        val db = Firebase.firestore
 
+        db.collection("Medicos")
+            .whereEqualTo("email", email)
+            .get()
+            .addOnSuccessListener { documents ->
+                if (!documents.isEmpty) {
+                    startActivity(Intent(this, HomeMedicoActivity::class.java))
+                    Log.i("INFO", "Usuario identificado como Médico")
+                } else {
+                    showAlert("Acceso denegado: No tienes permisos para acceder.")
+                    Log.e("INFO", "Usuario no encontrado en Administrador ni Medicos")
+                }
+            }
+            .addOnFailureListener { exception ->
+                showAlert("Error al verificar permisos: ${exception.message}")
+                Log.e("ERROR", "Error al consultar Firestore: ", exception)
+            }
+    }
 
-
-
-    private fun showAlert(text:String){
+    private fun showAlert(message: String) {
         val builder: AlertDialog.Builder = AlertDialog.Builder(this)
-        builder
-            .setMessage(text)
+        builder.setMessage(message)
             .setTitle("Error")
             .setPositiveButton("ACEPTAR", null)
         val dialog: AlertDialog = builder.create()
         dialog.show()
-
     }
 
-    fun onClickTipo(v: View?){
-        when(v?.id){
+    fun onClickTipo(v: View?) {
+        when (v?.id) {
             R.id.buttonCambioSesion -> {
                 intent = Intent(this, TipoActivity::class.java)
                 startActivity(intent)

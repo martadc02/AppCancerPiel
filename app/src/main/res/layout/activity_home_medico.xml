@@ -20,7 +20,7 @@
         android:id="@+id/textViewHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Menú principal"
+        android:text="Menú principal Medico"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="@android:color/black"
@@ -33,7 +33,7 @@
     <Button
         android:id="@+id/buttonListadoPacientes"
         android:layout_width="250dp"
-        android:layout_height="80dp"
+        android:layout_height="60dp"
         android:text="Listado de pacientes"
         android:textSize="16sp"
         android:backgroundTint="#0078D7"

@@ -35,6 +35,7 @@ class RegistroPacienteActivity : AppCompatActivity() {
     private lateinit var fechaNac : EditText
     private lateinit var nombre : EditText
     private lateinit var apellidos : EditText
+    private lateinit var dni : EditText
     private lateinit var gruposexo : RadioGroup
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +51,7 @@ class RegistroPacienteActivity : AppCompatActivity() {
         nombre = findViewById(R.id.nombreinfopersonal)
         apellidos = findViewById(R.id.apellidosinfopersonal)
         fechaNac = findViewById(R.id.fechanacimientoinfopersonal)
+        dni = findViewById(R.id.editdni)
         gruposexo = findViewById(R.id.radioGroupsexo)
 
         setup()
@@ -60,15 +62,20 @@ class RegistroPacienteActivity : AppCompatActivity() {
         btnRegistro.setOnClickListener {
             // Validar campos
             if (email.text.isBlank() || nombre.text.isBlank() || apellidos.text.isBlank() ||
-                fechaNac.text.isBlank() || telefono.text.isBlank()
+                fechaNac.text.isBlank() || telefono.text.isBlank() || dni.text.isBlank()
             ) {
                 Alert.showAlert(this, "Por favor, complete todos los campos")
-
+                return@setOnClickListener
             }
 
             if (!Patterns.EMAIL_ADDRESS.matcher(email.text.toString()).matches()) {
                 Alert.showAlert(this, "Por favor, ingrese un correo electrónico válido")
+                return@setOnClickListener
+            }
 
+            if (!dni.text.toString().matches(Regex("\\d{8}[A-HJ-NP-TV-Z]"))) {
+                Alert.showAlert(this, "Por favor, ingrese un DNI válido")
+                return@setOnClickListener
             }
 
             // Intentar registrar al usuario
@@ -84,6 +91,7 @@ class RegistroPacienteActivity : AppCompatActivity() {
                             "apellidos" to apellidos.text.toString(),
                             "fechaNacimiento" to fechaNac.text.toString(),
                             "telefono" to telefono.text.toString(),
+                            "dni" to dni.text.toString(),
                             "sexo" to when (gruposexo.checkedRadioButtonId) {
                                 R.id.radioButtonFemale -> "Femenino"
                                 R.id.radioButtonMale -> "Masculino"
@@ -113,6 +121,7 @@ class RegistroPacienteActivity : AppCompatActivity() {
             }
         }
     }
+
     fun onClickVolver(v: View?){
         when(v?.id){
             R.id.botonVolver -> {

@@ -29,7 +29,7 @@ class RegistrarMedicosActivity : AppCompatActivity() {
 
         // Inicialización de vistas
         nombreMedico = findViewById(R.id.editNombreMedico)
-        apellidosMedico = findViewById(R.id.editApellidosMedico) // Nuevo campo
+        apellidosMedico = findViewById(R.id.editApellidosMedico)
         emailMedico = findViewById(R.id.editEmailMedico)
         telefonoMedico = findViewById(R.id.editTelefonoMedico)
         passwordMedico = findViewById(R.id.editPasswordMedico)
@@ -81,7 +81,7 @@ class RegistrarMedicosActivity : AppCompatActivity() {
                 val medico = hashMapOf(
                     "uid" to userId,
                     "nombre" to nombre,
-                    "apellidos" to apellidos, // Apellidos añadidos
+                    "apellidos" to apellidos,
                     "email" to email,
                     "telefono" to telefono,
                     "tipo" to tipoMedico,
@@ -91,8 +91,8 @@ class RegistrarMedicosActivity : AppCompatActivity() {
                 db.collection("Medicos").document(userId!!)
                     .set(medico)
                     .addOnSuccessListener {
-                        showAlert("Médico registrado correctamente.")
-                        finish() // Cierra la actividad
+                        showSuccessDialog("Médico registrado correctamente.\n\n" +
+                                "Correo: $email\nContraseña: (proporcionada)")
                     }
                     .addOnFailureListener { e ->
                         showAlert("Error al guardar el médico: ${e.message}")
@@ -113,4 +113,16 @@ class RegistrarMedicosActivity : AppCompatActivity() {
             .create()
             .show()
     }
+
+    private fun showSuccessDialog(message: String) {
+        AlertDialog.Builder(this)
+            .setTitle("Registro Exitoso")
+            .setMessage(message)
+            .setPositiveButton("Aceptar") { _, _ ->
+                finish() // Cierra la actividad después del éxito
+            }
+            .create()
+            .show()
+    }
 }
+

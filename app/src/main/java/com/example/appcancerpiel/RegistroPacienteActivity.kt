@@ -5,21 +5,20 @@ import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.RadioGroup
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
 
 class RegistroPacienteActivity : AppCompatActivity() {
 
     private lateinit var btnRegistro: Button
     private lateinit var auth: FirebaseAuth
+    private val db = FirebaseFirestore.getInstance()
 
     private lateinit var telefono: EditText
     private lateinit var letreroSex: TextView
@@ -29,6 +28,9 @@ class RegistroPacienteActivity : AppCompatActivity() {
     private lateinit var apellidos: EditText
     private lateinit var dni: EditText
     private lateinit var gruposexo: RadioGroup
+    private lateinit var spinnerMedicos: Spinner
+
+    private lateinit var listaMedicos: MutableList<String> // Almacenará los UID de los médicos
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +40,6 @@ class RegistroPacienteActivity : AppCompatActivity() {
         btnRegistro = findViewById(R.id.botonRegistro)
         auth = FirebaseAuth.getInstance()
 
-
         telefono = findViewById(R.id.editTextPhone)
         letreroSex = findViewById(R.id.textViewSex)
         email = findViewById(R.id.correoinfopersonal)
@@ -47,87 +48,118 @@ class RegistroPacienteActivity : AppCompatActivity() {
         fechaNac = findViewById(R.id.fechanacimientoinfopersonal)
         dni = findViewById(R.id.editdni)
         gruposexo = findViewById(R.id.radioGroupsexo)
+        spinnerMedicos = findViewById(R.id.spinnerMedicos)
 
+        listaMedicos = mutableListOf()
+
+        cargarMedicosDisponibles()
         setup()
+    }
+
+    private fun cargarMedicosDisponibles() {
+        db.collection("Medicos")
+            .get()
+            .addOnSuccessListener { result ->
+                val nombresMedicos = mutableListOf<String>()
+                for (document in result) {
+                    val nombreMedico = document.getString("nombre") + " " + document.getString("apellidos")
+                    val uidMedico = document.id
+                    listaMedicos.add(uidMedico)
+                    nombresMedicos.add(nombreMedico!!)
+                }
+                // Configura el Spinner con los nombres de los médicos
+                val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, nombresMedicos)
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spinnerMedicos.adapter = adapter
+            }
+            .addOnFailureListener { exception ->
+                showAlert("Error al cargar médicos: ${exception.message}")
+                Log.e("ERROR", "Error al cargar médicos", exception)
+            }
     }
 
     private fun setup() {
         btnRegistro.setOnClickListener {
-            // Validar campos obligatorios
-            if (email.text.isBlank() || nombre.text.isBlank() || apellidos.text.isBlank() ||
-                fechaNac.text.isBlank() || telefono.text.isBlank() || dni.text.isBlank()
-            ) {
-                showAlert("Por favor, complete todos los campos")
-                return@setOnClickListener
-            }
-
-            // Validar formato de email
-            if (!Patterns.EMAIL_ADDRESS.matcher(email.text.toString()).matches()) {
-                showAlert("Por favor, ingrese un correo electrónico válido")
-                return@setOnClickListener
-            }
-
-            // Validar formato de DNI
-            if (!dni.text.toString().matches(Regex("\\d{8}[A-HJ-NP-TV-Z]"))) {
-                showAlert("Por favor, ingrese un DNI válido")
-                return@setOnClickListener
-            }
-
-            // Registrar el usuario en Firebase Authentication
-            auth.createUserWithEmailAndPassword(
-                email.text.toString(),
-                "defaultPassword123" // Contraseña por defecto
-            ).addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val currentUser = auth.currentUser
-                    if (currentUser != null) {
-                        // Datos del paciente
-                        val paciente = hashMapOf(
-                            "nombre" to nombre.text.toString(),
-                            "apellidos" to apellidos.text.toString(),
-                            "fechaNacimiento" to fechaNac.text.toString(),
-                            "telefono" to telefono.text.toString(),
-                            "dni" to dni.text.toString(),
-                            "sexo" to when (gruposexo.checkedRadioButtonId) {
-                                R.id.radioButtonFemale -> "Femenino"
-                                R.id.radioButtonMale -> "Masculino"
-                                else -> "No especificado"
-                            },
-                            "email" to email.text.toString()
-                        )
-
-                        // Guardar en Firestore
-                        val db = Firebase.firestore
-                        db.collection("Pacientes").document(currentUser.uid)
-                            .set(paciente)
-                            .addOnSuccessListener {
-                                Log.i("INFO", "Información del paciente registrada correctamente")
-                                showSuccessDialog()
-                            }
-                            .addOnFailureListener { e ->
-                                Log.e("ERROR", "Error al registrar información del paciente", e)
-                                showAlert("Error al guardar la información del paciente")
-                            }
-                    }
-                } else {
-                    val errorMessage = when (task.exception) {
-                        is FirebaseAuthUserCollisionException -> "El correo ya está registrado"
-                        else -> task.exception?.localizedMessage ?: "Error desconocido"
-                    }
-                    Log.e("ERROR", "Error al registrar usuario: $errorMessage", task.exception)
-                    showAlert(errorMessage)
-                }
+            if (validarCampos()) {
+                registrarPaciente()
             }
         }
     }
 
-    // Mostrar un mensaje de éxito y redirigir
-    private fun showSuccessDialog() {
+    private fun validarCampos(): Boolean {
+        // Validar campos obligatorios
+        if (email.text.isBlank() || nombre.text.isBlank() || apellidos.text.isBlank() ||
+            fechaNac.text.isBlank() || telefono.text.isBlank() || dni.text.isBlank()
+        ) {
+            showAlert("Por favor, complete todos los campos")
+            return false
+        }
+
+        // Validar formato de email
+        if (!Patterns.EMAIL_ADDRESS.matcher(email.text.toString()).matches()) {
+            showAlert("Por favor, ingrese un correo electrónico válido")
+            return false
+        }
+
+        // Validar formato de DNI
+        if (!dni.text.toString().matches(Regex("\\d{8}[A-HJ-NP-TV-Z]"))) {
+            showAlert("Por favor, ingrese un DNI válido")
+            return false
+        }
+
+        return true
+    }
+
+    private fun registrarPaciente() {
+        val medicoSeleccionadoIndex = spinnerMedicos.selectedItemPosition
+        if (medicoSeleccionadoIndex == -1) {
+            showAlert("Por favor, seleccione un médico para asignar al paciente.")
+            return
+        }
+
+        val medicoUid = listaMedicos[medicoSeleccionadoIndex]
+        val paciente = hashMapOf(
+            "nombre" to nombre.text.toString(),
+            "apellidos" to apellidos.text.toString(),
+            "fechaNacimiento" to fechaNac.text.toString(),
+            "telefono" to telefono.text.toString(),
+            "dni" to dni.text.toString(),
+            "sexo" to when (gruposexo.checkedRadioButtonId) {
+                R.id.radioButtonFemale -> "Femenino"
+                R.id.radioButtonMale -> "Masculino"
+                else -> "No especificado"
+            },
+            "email" to email.text.toString(),
+            "medicoUid" to medicoUid // Referencia al médico asignado
+        )
+
+        // Guardar el paciente en la colección global "Pacientes"
+        db.collection("Pacientes")
+            .add(paciente)
+            .addOnSuccessListener { documentRef ->
+                val pacienteId = documentRef.id
+                // Guardar el paciente en la subcolección "Pacientes" del médico asignado
+                db.collection("Medicos").document(medicoUid)
+                    .collection("Pacientes").document(pacienteId)
+                    .set(paciente)
+                    .addOnSuccessListener {
+                        showSuccessDialog("Paciente registrado correctamente y asignado al médico.")
+                    }
+                    .addOnFailureListener { e ->
+                        showAlert("Error al asignar paciente al médico: ${e.message}")
+                    }
+            }
+            .addOnFailureListener { e ->
+                showAlert("Error al registrar paciente: ${e.message}")
+                Log.e("ERROR", "Error al registrar paciente", e)
+            }
+    }
+
+    private fun showSuccessDialog(message: String) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Registro exitoso")
-            .setMessage("El paciente se ha registrado correctamente.")
+            .setMessage(message)
             .setPositiveButton("Aceptar") { _, _ ->
-                // Redirigir a la página principal del administrador
                 val intent = Intent(this, HomeAdminActivity::class.java)
                 startActivity(intent)
                 finish()
@@ -136,7 +168,6 @@ class RegistroPacienteActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    // Mostrar alerta de error
     private fun showAlert(message: String) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Error")
@@ -144,16 +175,5 @@ class RegistroPacienteActivity : AppCompatActivity() {
             .setPositiveButton("Aceptar", null)
         val dialog: AlertDialog = builder.create()
         dialog.show()
-    }
-
-    // Botón para volver a la página principal del administrador
-    fun onClickVolver(v: View?) {
-        when (v?.id) {
-            R.id.botonVolver -> {
-                val intent = Intent(this, HomeAdminActivity::class.java)
-                startActivity(intent)
-                finish()
-            }
-        }
     }
 }

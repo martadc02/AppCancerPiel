@@ -7,10 +7,12 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 
 class PrimerasPruebasActivity : AppCompatActivity() {
+
     private lateinit var textViewTitulo: TextView
     private lateinit var btnHistoriaClinica: Button
     private lateinit var btnExploracionClinica: Button
@@ -29,24 +31,28 @@ class PrimerasPruebasActivity : AppCompatActivity() {
             title = "Primeras Pruebas" // Título de la Toolbar
         }
 
+        // Inicialización de vistas
         textViewTitulo = findViewById(R.id.textViewTitulo)
         btnHistoriaClinica = findViewById(R.id.btnHistoriaClinica)
         btnExploracionClinica = findViewById(R.id.btnExploracionClinica)
         btnDermatoscopia = findViewById(R.id.btnDermatoscopia)
         btnValoracionResultados = findViewById(R.id.btnValoracionResultados)
 
-        // Obtener el nombre y apellidos del paciente desde el Intent
+        // Botones dinámicos
+        val btnLesionSospechosa: Button = findViewById(R.id.btnLesionSospechosa)
+        val btnLesionNoSospechosa: Button = findViewById(R.id.btnLesionNoSospechosa)
+
+        // Obtener el nombre, apellidos y ID del paciente desde el Intent
         val nombre = intent.getStringExtra("NOMBRE")
         val apellidos = intent.getStringExtra("APELLIDOS")
+        val pacienteId = intent.getStringExtra("PACIENTE_ID") // Opcional
 
         // Configurar el título de la actividad
         textViewTitulo.text = "Primeras Pruebas del Paciente: $nombre $apellidos"
 
         // Configurar el botón de Historia Clínica
         btnHistoriaClinica.setOnClickListener {
-            // Crear un Intent para abrir RealizarHistoriaClinicaActivity
             val intent = Intent(this, RealizarHistoriaClinicaActivity::class.java)
-            // Pasar datos del paciente al siguiente Activity
             intent.putExtra("nombrePaciente", nombre)
             intent.putExtra("apellidosPaciente", apellidos)
             startActivity(intent)
@@ -68,22 +74,28 @@ class PrimerasPruebasActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // Configurar el botón de Valoración de Resultados
         btnValoracionResultados.setOnClickListener {
-            // Obtener referencias a los nuevos botones
-            val btnLesionSospechosa: Button = findViewById(R.id.btnLesionSospechosa)
-            val btnLesionNoSospechosa: Button = findViewById(R.id.btnLesionNoSospechosa)
-
-            // Cambiar la visibilidad de los botones a "VISIBLE"
+            // Mostrar botones dinámicos
             btnLesionSospechosa.visibility = View.VISIBLE
             btnLesionNoSospechosa.visibility = View.VISIBLE
 
-            // Configurar listeners para los nuevos botones
+            // Configurar botón "Lesión Sospechosa"
             btnLesionSospechosa.setOnClickListener {
-                // Acción para "Lesión Sospechosa"
+                // Ir a EleccionDermatologoActivity con nombre y apellidos del paciente
+                if (nombre.isNullOrEmpty() || apellidos.isNullOrEmpty()) {
+                    Toast.makeText(this, "Error: Información del paciente no disponible.", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                val intent = Intent(this, EleccionDermatologoActivity::class.java)
+                intent.putExtra("nombrePaciente", nombre)
+                intent.putExtra("apellidosPaciente", apellidos)
+                startActivity(intent)
             }
 
+            // Configurar botón "Lesión No Sospechosa"
             btnLesionNoSospechosa.setOnClickListener {
-                // Acción para "Lesión No Sospechosa"
+                Toast.makeText(this, "Lesión No Sospechosa seleccionada.", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -100,8 +112,8 @@ class PrimerasPruebasActivity : AppCompatActivity() {
                 true
             }
             R.id.action_home -> { // Icono de Home en el menú
-                val intent = Intent(this, HomeMedicoActivity::class.java) // Crear el Intent para abrir HomeMedicoActivity
-                startActivity(intent) // Iniciar la nueva actividad
+                val intent = Intent(this, HomeMedicoActivity::class.java)
+                startActivity(intent)
                 true
             }
             else -> super.onOptionsItemSelected(item)

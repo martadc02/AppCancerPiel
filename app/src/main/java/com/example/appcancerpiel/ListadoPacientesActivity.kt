@@ -1,10 +1,17 @@
 package com.example.appcancerpiel
 
+import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import android.widget.EditText
 import com.example.appcancerpiel.modelo.Paciente
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -12,23 +19,86 @@ import com.google.firebase.firestore.FirebaseFirestore
 class ListadoPacientesActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
+    private lateinit var searchField: EditText
     private lateinit var pacienteAdapter: PacienteAdapter
     private val db = FirebaseFirestore.getInstance()
-    private val listaPacientes = mutableListOf<Paciente>()
+    private val listaPacientes = mutableListOf<Paciente>() // Lista completa
+    private val filteredList = mutableListOf<Paciente>() // Lista filtrada
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_listado_pacientes)
 
         // Inicialización del RecyclerView
-        recyclerView = findViewById(R.id.recyclerViewPacientes)
+        recyclerView = findViewById(R.id.recyclerViewPacientes) // Asegúrate de que el ID es correcto
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        pacienteAdapter = PacienteAdapter(listaPacientes)
+        // Inicialización de la Toolbar
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true) // Habilitar botón "Atrás"
+            title = "Listado de Pacientes" // Título de la Toolbar
+        }
+
+        // Configurar el adaptador con el callback para el clic
+        pacienteAdapter = PacienteAdapter(filteredList) { paciente ->
+            // Este código se ejecuta cuando un paciente es clickeado
+            val intent = Intent(this, DetallePacienteActivity::class.java)
+            intent.putExtra("NOMBRE", paciente.nombre)
+            intent.putExtra("APELLIDOS", paciente.apellidos)
+            startActivity(intent)
+        }
         recyclerView.adapter = pacienteAdapter
+
+        // Inicializar campo de búsqueda
+        searchField = findViewById(R.id.editTextSearch)
+        searchField.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                filterPacientes(s.toString())
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
 
         // Verificar el rol del usuario y cargar los pacientes correspondientes
         verificarRolYcargarPacientes()
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_toolbar, menu) // Inflar el menú si existe
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> { // Botón "Atrás" en la Toolbar
+                finish()
+                true
+            }
+            R.id.action_home -> { // Icono de Home en el menú
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun filterPacientes(query: String) {
+        filteredList.clear()
+        if (query.isEmpty()) {
+            filteredList.addAll(listaPacientes) // Mostrar todos si el campo está vacío
+        } else {
+            val lowercaseQuery = query.lowercase()
+            filteredList.addAll(
+                listaPacientes.filter {
+                    it.nombre.lowercase().startsWith(lowercaseQuery)
+                }
+            )
+        }
+        pacienteAdapter.notifyDataSetChanged()
     }
 
     private fun verificarRolYcargarPacientes() {
@@ -119,6 +189,8 @@ class ListadoPacientesActivity : AppCompatActivity() {
                 if (listaPacientes.isEmpty()) {
                     Log.w("INFO", "No hay pacientes registrados en la colección.")
                 }
+                filteredList.clear()
+                filteredList.addAll(listaPacientes)
                 pacienteAdapter.notifyDataSetChanged()
                 Log.i("INFO", "Todos los pacientes cargados correctamente")
             }
@@ -141,6 +213,8 @@ class ListadoPacientesActivity : AppCompatActivity() {
                 if (listaPacientes.isEmpty()) {
                     Log.w("INFO", "No hay pacientes asignados al médico con UID: $medicoUid")
                 }
+                filteredList.clear()
+                filteredList.addAll(listaPacientes)
                 pacienteAdapter.notifyDataSetChanged()
                 Log.i("INFO", "Pacientes asignados cargados correctamente")
             }
@@ -148,5 +222,5 @@ class ListadoPacientesActivity : AppCompatActivity() {
                 Log.e("ERROR", "Error al cargar pacientes asignados: ${exception.message}", exception)
             }
     }
-
 }
+

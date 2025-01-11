@@ -7,6 +7,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import androidx.appcompat.widget.Toolbar
+import android.view.Menu
+import android.view.MenuItem
+
 
 class RegistrarMedicosActivity : AppCompatActivity() {
 
@@ -27,6 +31,14 @@ class RegistrarMedicosActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registrar_medicos)
 
+        // Inicialización de la Toolbar
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true) // Habilitar botón "Atrás"
+            title = "Registrar Nuevo Médico" // Título de la Toolbar
+        }
+
         // Inicialización de vistas
         nombreMedico = findViewById(R.id.editNombreMedico)
         apellidosMedico = findViewById(R.id.editApellidosMedico)
@@ -41,6 +53,25 @@ class RegistrarMedicosActivity : AppCompatActivity() {
         // Configurar el botón
         btnRegistrarMedico.setOnClickListener {
             registrarMedico()
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_toolbar, menu) // Inflar el menú si existe
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> { // Botón "Atrás" en la Toolbar
+                finish()
+                true
+            }
+            R.id.action_home -> { // Icono de Home en el menú
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

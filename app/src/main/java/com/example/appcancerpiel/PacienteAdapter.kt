@@ -7,13 +7,23 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appcancerpiel.modelo.Paciente
 
-class PacienteAdapter(private val listaPacientes: List<Paciente>) :
-    RecyclerView.Adapter<PacienteAdapter.PacienteViewHolder>() {
+class PacienteAdapter(
+    private val listaPacientes: List<Paciente>,
+    private val onItemClick: (Paciente) -> Unit // Callback que recibirá el paciente clickeado
+) : RecyclerView.Adapter<PacienteAdapter.PacienteViewHolder>() {
 
     // ViewHolder para representar cada paciente en el RecyclerView
     inner class PacienteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nombre: TextView = itemView.findViewById(R.id.textNombrePaciente)
         val email: TextView = itemView.findViewById(R.id.textEmailPaciente)
+
+        // Configuramos el clic en el item
+        init {
+            itemView.setOnClickListener {
+                val paciente = listaPacientes[adapterPosition] // Obtener el paciente correspondiente al clic
+                onItemClick(paciente) // Llamar al callback para manejar el clic
+            }
+        }
     }
 
     // Inflar el layout item_paciente para cada ítem del RecyclerView
@@ -35,3 +45,4 @@ class PacienteAdapter(private val listaPacientes: List<Paciente>) :
         return listaPacientes.size
     }
 }
+

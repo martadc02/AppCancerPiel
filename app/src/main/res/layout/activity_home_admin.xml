@@ -9,82 +9,83 @@
     tools:context=".HomeAdminActivity">
 
     <!-- Encabezado "Menú Principal" -->
+
+
     <TextView
         android:id="@+id/textViewHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="112dp"
         android:text="Menú Administrativo"
+        android:textColor="@android:color/black"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="@android:color/black"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp" />
-
-    <!-- Barra azul lateral -->
-    <View
-        android:id="@+id/barraAzul"
-        android:layout_width="50dp"
-        android:layout_height="0dp"
-        android:background="@color/blue"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_listado_paciente"
         android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="52dp"
+        android:backgroundTint="@color/blue"
         android:onClick="onClick"
         android:text="Listado Paciente"
-        android:backgroundTint="@color/blue"
-        app:layout_constraintTop_toBottomOf="@id/textViewHeader"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/textViewHeader" />
 
     <Button
         android:id="@+id/btn_registro_paciente"
         android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="52dp"
+        android:backgroundTint="@color/blue"
         android:onClick="onClick"
         android:text="Registro Paciente"
-        android:backgroundTint="@color/blue"
-        app:layout_constraintTop_toBottomOf="@id/btn_listado_paciente"
-        app:layout_constraintStart_toEndOf="@id/barraAzul"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/btn_listado_paciente" />
 
     <Button
         android:id="@+id/btn_registrar_medicos"
         android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="52dp"
+        android:backgroundTint="@color/blue"
         android:onClick="onClick"
         android:text="Registrar Médicos"
-        android:backgroundTint="@color/blue"
-        app:layout_constraintTop_toBottomOf="@id/btn_registro_paciente"
-        app:layout_constraintStart_toEndOf="@id/barraAzul"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/btn_registro_paciente" />
 
     <Button
         android:id="@+id/btn_cerrar_sesion"
         android:layout_width="250dp"
         android:layout_height="60dp"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="52dp"
+        android:backgroundTint="@color/blue"
         android:onClick="onClick"
         android:text="Cerrar Sesión"
-        android:backgroundTint="@color/blue"
-        app:layout_constraintTop_toBottomOf="@id/btn_registrar_medicos"
-        app:layout_constraintStart_toEndOf="@id/barraAzul"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/btn_registrar_medicos" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:background="@color/blue"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

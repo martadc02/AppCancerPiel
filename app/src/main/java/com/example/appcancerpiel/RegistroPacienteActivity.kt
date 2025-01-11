@@ -13,6 +13,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
+import androidx.appcompat.widget.Toolbar
+import android.view.Menu
+import android.view.MenuItem
 
 class RegistroPacienteActivity : AppCompatActivity() {
 
@@ -36,6 +39,14 @@ class RegistroPacienteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registro_paciente)
 
+        // Inicialización de la Toolbar
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true) // Habilitar botón "Atrás"
+            title = "Registrar Nuevo Paciente" // Título de la Toolbar
+        }
+
         // Inicialización de los componentes
         btnRegistro = findViewById(R.id.botonRegistro)
         auth = FirebaseAuth.getInstance()
@@ -54,6 +65,25 @@ class RegistroPacienteActivity : AppCompatActivity() {
 
         cargarMedicosDisponibles()
         setup()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_toolbar, menu) // Inflar el menú si existe
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> { // Botón "Atrás" en la Toolbar
+                finish()
+                true
+            }
+            R.id.action_home -> { // Icono de Home en el menú
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun cargarMedicosDisponibles() {

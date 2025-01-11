@@ -3,28 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:gravity="center_horizontal">
+    android:padding="16dp">
 
-    <!-- Título -->
     <TextView
         android:id="@+id/tituloPruebasPendientes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pruebas Pendientes del Paciente"
+        android:text="Pruebas Pendientes"
         android:textStyle="bold"
         android:textSize="20sp"
-        android:gravity="center"
-        android:layout_marginBottom="24dp" />
-
-    <!-- Subtítulo con el nombre del paciente -->
-    <TextView
-        android:id="@+id/nombrePacientePruebasPendientes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nombre del Paciente"
-        android:textSize="18sp"
-        android:textStyle="bold"
         android:gravity="center"
         android:layout_marginBottom="24dp" />
 
@@ -35,9 +22,8 @@
         android:layout_height="wrap_content"
         android:text="Reevaluación"
         android:visibility="gone"
-        android:backgroundTint="@color/blue"
-        android:textColor="@android:color/white"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="8dp"
+        android:textColor="@android:color/white" />
 
     <!-- Botón Iconografía -->
     <Button
@@ -46,9 +32,8 @@
         android:layout_height="wrap_content"
         android:text="Iconografía"
         android:visibility="gone"
-        android:backgroundTint="@color/blue"
-        android:textColor="@android:color/white"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="8dp"
+        android:textColor="@android:color/white" />
 
     <!-- Botón Biopsia -->
     <Button
@@ -57,8 +42,18 @@
         android:layout_height="wrap_content"
         android:text="Biopsia"
         android:visibility="gone"
-        android:backgroundTint="@color/blue"
-        android:textColor="@android:color/white"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/azul"
+        android:textColor="@android:color/white" />
 
+    <!-- Botón Valoración de Resultados -->
+    <Button
+        android:id="@+id/botonValoracionResultados"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Valoración de Resultados"
+        android:visibility="gone"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/rojo"
+        android:textColor="@android:color/white" />
 </LinearLayout>

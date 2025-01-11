@@ -11,5 +11,8 @@
     <color name="morado_oscuro">#dc88fe</color>
     <color name="rojo">#E63933</color>
     <color name="verde">#7adf6d</color>
+    <color name="gris_claro">#BDBDBD</color>
+    <color name="azul">#2196F3</color>
+
 
 </resources>

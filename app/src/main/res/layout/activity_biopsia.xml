@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Nombre del paciente -->
+        <TextView
+            android:id="@+id/nombrePacienteBiopsia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="José María Jiménez Delgado"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="24dp"
+            android:textSize="18sp" />
+
+        <!-- Tipo de biopsia -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tipo de biopsia" />
+
+        <CheckBox
+            android:id="@+id/checkboxEscisional"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Escisional" />
+
+        <CheckBox
+            android:id="@+id/checkboxIncisional"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Incisional" />
+
+        <!-- Tumor -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Tumor" />
+
+        <CheckBox
+            android:id="@+id/checkboxPrimario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Primario" />
+
+        <CheckBox
+            android:id="@+id/checkboxRecidivante"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recidivante" />
+
+        <!-- Prioridad -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Prioridad" />
+
+        <CheckBox
+            android:id="@+id/checkboxUrgente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Urgente" />
+
+        <CheckBox
+            android:id="@+id/checkboxNoUrgente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No urgente" />
+
+        <!-- Localización -->
+        <EditText
+            android:id="@+id/inputLocalizacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Localización de la lesión"
+            android:layout_marginTop="16dp" />
+
+        <!-- Descripción -->
+        <EditText
+            android:id="@+id/inputDescripcion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Descripción breve de la lesión"
+            android:layout_marginTop="16dp" />
+
+        <!-- Botón Guardar -->
+        <Button
+            android:id="@+id/botonGuardar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GUARDAR"
+            android:backgroundTint="@color/verde"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="24dp" />
+    </LinearLayout>
+</ScrollView>

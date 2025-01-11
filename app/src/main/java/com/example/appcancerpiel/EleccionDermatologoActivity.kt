@@ -25,12 +25,22 @@ class EleccionDermatologoActivity : AppCompatActivity() {
         spinnerDermatologos = findViewById(R.id.spinnerDermatologos)
         botonAsignar = findViewById(R.id.botonAsignarDermatologo)
 
-        // Cargar dermatólogos desde Firestore
+        // Obtener datos del Intent
+        val nombrePaciente = intent.getStringExtra("nombrePaciente")
+        val apellidosPaciente = intent.getStringExtra("apellidosPaciente")
+
+        if (nombrePaciente == null || apellidosPaciente == null) {
+            Toast.makeText(this, "Error: Datos del paciente no disponibles.", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+        }
+
+        // Mostrar dermatólogos en el Spinner
         cargarDermatologos()
 
         // Configurar botón para asignar el paciente al dermatólogo seleccionado
         botonAsignar.setOnClickListener {
-            asignarPaciente()
+            asignarPaciente(nombrePaciente, apellidosPaciente)
         }
     }
 
@@ -55,7 +65,7 @@ class EleccionDermatologoActivity : AppCompatActivity() {
             }
     }
 
-    private fun asignarPaciente() {
+    private fun asignarPaciente(nombrePaciente: String, apellidosPaciente: String) {
         val indexSeleccionado = spinnerDermatologos.selectedItemPosition
         if (indexSeleccionado == -1) {
             Toast.makeText(this, "Por favor selecciona un dermatólogo", Toast.LENGTH_SHORT).show()
@@ -63,23 +73,22 @@ class EleccionDermatologoActivity : AppCompatActivity() {
         }
 
         val uidDermatologoSeleccionado = dermatologosUid[indexSeleccionado]
-        val pacienteId = intent.getStringExtra("pacienteId") // Pasado desde la actividad anterior
 
-        if (pacienteId == null) {
-            Toast.makeText(this, "Error: No se pudo obtener el ID del paciente.", Toast.LENGTH_SHORT).show()
-            return
-        }
-
-        // Obtener los datos del paciente desde Firestore
-        db.collection("Pacientes").document(pacienteId)
+        // Buscar al paciente en Firestore por nombre y apellidos
+        db.collection("Pacientes")
+            .whereEqualTo("nombre", nombrePaciente)
+            .whereEqualTo("apellidos", apellidosPaciente)
             .get()
-            .addOnSuccessListener { document ->
-                if (document.exists()) {
-                    val paciente = document.data
-                    // Guardar los datos del paciente en la subcolección del dermatólogo seleccionado
+            .addOnSuccessListener { result ->
+                if (!result.isEmpty) {
+                    val pacienteDocument = result.documents[0]
+                    val pacienteId = pacienteDocument.id
+                    val pacienteData = pacienteDocument.data
+
+                    // Asignar paciente al dermatólogo seleccionado
                     db.collection("Medicos").document(uidDermatologoSeleccionado)
                         .collection("Pacientes").document(pacienteId)
-                        .set(paciente!!)
+                        .set(pacienteData!!)
                         .addOnSuccessListener {
                             Toast.makeText(this, "Paciente asignado correctamente al dermatólogo.", Toast.LENGTH_SHORT).show()
                             finish() // Cierra la actividad al completar la asignación
@@ -88,11 +97,11 @@ class EleccionDermatologoActivity : AppCompatActivity() {
                             Toast.makeText(this, "Error al asignar paciente: ${e.message}", Toast.LENGTH_SHORT).show()
                         }
                 } else {
-                    Toast.makeText(this, "Paciente no encontrado.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Paciente no encontrado en la base de datos.", Toast.LENGTH_SHORT).show()
                 }
             }
             .addOnFailureListener { e ->
-                Toast.makeText(this, "Error al obtener datos del paciente: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Error al buscar paciente: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
 }

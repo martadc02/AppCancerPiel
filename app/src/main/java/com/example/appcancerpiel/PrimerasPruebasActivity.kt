@@ -42,17 +42,30 @@ class PrimerasPruebasActivity : AppCompatActivity() {
         // Configurar el título de la actividad
         textViewTitulo.text = "Primeras Pruebas del Paciente: $nombre $apellidos"
 
-        // Configurar los botones según sea necesario
+        // Configurar el botón de Historia Clínica
         btnHistoriaClinica.setOnClickListener {
-            // botón de Historia Clínica
+            // Crear un Intent para abrir RealizarHistoriaClinicaActivity
+            val intent = Intent(this, RealizarHistoriaClinicaActivity::class.java)
+            // Pasar datos del paciente al siguiente Activity
+            intent.putExtra("nombrePaciente", nombre)
+            intent.putExtra("apellidosPaciente", apellidos)
+            startActivity(intent)
         }
 
+        // Configurar el botón de Exploración Clínica
         btnExploracionClinica.setOnClickListener {
-            // botón de Exploración Clínica
+            val intent = Intent(this, ExploracionClinicaActivity::class.java)
+            intent.putExtra("nombrePaciente", nombre)
+            intent.putExtra("apellidosPaciente", apellidos)
+            startActivity(intent)
         }
 
+        // Configurar el botón de Dermatoscopia
         btnDermatoscopia.setOnClickListener {
-            // botón de Dermatóscopia
+            val intent = Intent(this, DermatoscopiaActivity::class.java)
+            intent.putExtra("nombrePaciente", nombre)
+            intent.putExtra("apellidosPaciente", apellidos)
+            startActivity(intent)
         }
 
         btnValoracionResultados.setOnClickListener {

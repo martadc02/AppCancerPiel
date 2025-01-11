@@ -14,4 +14,5 @@
     <string name="female">Mujer</string>
     <string name="men_principal">Menú Principal</string>
     <string name="title_activity_home_dermatologo">HomeDermatologoActivity</string>
+    <string name="title_activity_realizar_historia_clinica">RealizarHistoriaClinicaActivity</string>
 </resources>

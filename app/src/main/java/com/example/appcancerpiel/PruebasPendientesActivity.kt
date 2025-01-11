@@ -45,13 +45,13 @@ class PruebasPendientesActivity : AppCompatActivity() {
         }
 
         botonBiopsia.setOnClickListener {
-            // Navegar a BiopsiaActivity
             val intent = Intent(this, BiopsiaActivity::class.java)
             startActivity(intent)
         }
 
         botonValoracionResultados.setOnClickListener {
-            // Acción para Valoración de Resultados
+            val intent = Intent(this, ValoracionResultadosActivity::class.java)
+            startActivity(intent)
         }
     }
 }

@@ -54,5 +54,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnDatosPaciente" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Botón para pruebas dermatólogo -->
+    <Button
+        android:id="@+id/btnPruebasDermatologo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:backgroundTint="@color/blue"
+        android:text="Pruebas Dermatólogo"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnPrimerasPruebas" />
 
+</androidx.constraintlayout.widget.ConstraintLayout>

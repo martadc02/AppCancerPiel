@@ -2,8 +2,11 @@ package com.example.appcancerpiel
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -15,6 +18,10 @@ class HomeMedicoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_medico)
+
+        // Inicialización de la Toolbar
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
 
         // Inicialización de botones
         btnListadoPacientes = findViewById(R.id.btnListadoPacientes)
@@ -29,6 +36,25 @@ class HomeMedicoActivity : AppCompatActivity() {
         // Configurar botón de cerrar sesión
         btnCerrarSesion.setOnClickListener {
             cerrarSesion()
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_toolbar, menu) // Inflar el menú si existe
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> { // Botón "Atrás" en la Toolbar
+                finish()
+                true
+            }
+            R.id.action_home -> { // Icono de Home en el menú
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

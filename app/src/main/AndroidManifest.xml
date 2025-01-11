@@ -13,6 +13,9 @@
         android:theme="@style/Theme.AppCancerPiel"
         tools:targetApi="31">
         <activity
+            android:name=".PrimerasPruebasActivity"
+            android:exported="false" />
+        <activity
             android:name=".DetallePacienteActivity"
             android:exported="false" />
         <activity

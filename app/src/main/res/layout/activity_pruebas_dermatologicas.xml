@@ -1,83 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <!-- Toolbar -->
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/blue"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!-- Título del paciente -->
+    <!-- Título de la actividad -->
     <TextView
-        android:id="@+id/textViewTitulo"
-        android:layout_width="wrap_content"
+        android:id="@+id/tituloPruebas"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Nombre del Paciente"
+        android:text="Solicitud de pruebas"
         android:textStyle="bold"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Nombre del paciente -->
+    <TextView
+        android:id="@+id/nombrePaciente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nombre del Paciente"
         android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:gravity="center"
+        android:layout_marginBottom="24dp" />
 
-    <!-- CheckBox Reevaluación -->
+    <!-- Checkboxes para las pruebas -->
     <CheckBox
-        android:id="@+id/checkBoxReevaluacion"
-        android:layout_width="250dp"
+        android:id="@+id/checkboxReevaluacion"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Reevaluación"
-        android:backgroundTint="@color/blue"
-        android:buttonTint="@color/blue"
-        app:layout_constraintTop_toBottomOf="@id/textViewTitulo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:text="Reevaluación" />
 
-    <!-- CheckBox Iconografía -->
     <CheckBox
-        android:id="@+id/checkBoxIconografia"
-        android:layout_width="250dp"
+        android:id="@+id/checkboxIconografia"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="Iconografía"
-        android:backgroundTint="@color/blue"
-        android:buttonTint="@color/blue"
-        app:layout_constraintTop_toBottomOf="@id/checkBoxReevaluacion"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginTop="16dp" />
 
-    <!-- CheckBox Biopsia -->
     <CheckBox
-        android:id="@+id/checkBoxBiopsia"
-        android:layout_width="250dp"
+        android:id="@+id/checkboxBiopsia"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="Biopsia"
-        android:backgroundTint="@color/blue"
-        android:buttonTint="@color/blue"
-        app:layout_constraintTop_toBottomOf="@id/checkBoxIconografia"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginTop="16dp" />
 
     <!-- Botón Enviar -->
     <Button
-        android:id="@+id/btnEnviar"
-        android:layout_width="150dp"
+        android:id="@+id/botonEnviar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:text="Enviar"
         android:backgroundTint="@color/verde"
         android:textColor="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@id/checkBoxBiopsia"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_marginTop="32dp" />
+</LinearLayout>

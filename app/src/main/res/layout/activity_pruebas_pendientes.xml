@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center_horizontal">
+
+    <!-- Título -->
+    <TextView
+        android:id="@+id/tituloPruebasPendientes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pruebas Pendientes del Paciente"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Subtítulo con el nombre del paciente -->
+    <TextView
+        android:id="@+id/nombrePacientePruebasPendientes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nombre del Paciente"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Botón Reevaluación -->
+    <Button
+        android:id="@+id/botonReevaluacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reevaluación"
+        android:visibility="gone"
+        android:backgroundTint="@color/blue"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Botón Iconografía -->
+    <Button
+        android:id="@+id/botonIconografia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Iconografía"
+        android:visibility="gone"
+        android:backgroundTint="@color/blue"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Botón Biopsia -->
+    <Button
+        android:id="@+id/botonBiopsia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Biopsia"
+        android:visibility="gone"
+        android:backgroundTint="@color/blue"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="16dp" />
+
+</LinearLayout>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Nombre del Paciente -->
+        <TextView
+            android:id="@+id/nombre_paciente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre del Paciente"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"
+            android:textSize="18sp" />
+
+        <!-- Campo Color de Piel -->
+        <EditText
+            android:id="@+id/color_piel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Color de Piel"
+            android:inputType="text" />
+
+        <!-- Campo Color de Pelo -->
+        <EditText
+            android:id="@+id/color_pelo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Color de Pelo"
+            android:inputType="text"
+            android:layout_marginTop="8dp" />
+
+        <!-- Campo Color de Ojos -->
+        <EditText
+            android:id="@+id/color_ojos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Color de Ojos"
+            android:inputType="text"
+            android:layout_marginTop="8dp" />
+
+        <!-- Checkboxes -->
+        <CheckBox
+            android:id="@+id/checkbox_exposicion_solar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Exposición solar"
+            android:layout_marginTop="16dp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_radiaciones_ionizantes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Radiaciones ionizantes" />
+
+        <CheckBox
+            android:id="@+id/checkbox_consumo_alcohol"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Consumo frecuente alcohol" />
+
+        <CheckBox
+            android:id="@+id/checkbox_consumo_tabaco"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Consumo frecuente tabaco" />
+
+        <!-- Botón Guardar -->
+        <Button
+            android:id="@+id/boton_guardar_historia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GUARDAR"
+            android:backgroundTint="@android:color/holo_green_dark"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="16dp" />
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Nombre del paciente -->
+        <TextView
+            android:id="@+id/nombre_paciente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nombre del Paciente"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"
+            android:textSize="18sp" />
+
+        <!-- Opciones de exploración -->
+        <CheckBox
+            android:id="@+id/checkbox_lesiones_crecimiento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lesiones crecimiento prog." />
+
+        <CheckBox
+            android:id="@+id/checkbox_ulcera_curacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Úlcera sin tendencia a curación" />
+
+        <CheckBox
+            android:id="@+id/checkbox_pustula_hemorragica"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pústula hemorrágica" />
+
+        <CheckBox
+            android:id="@+id/checkbox_lesiones_cicatrizales"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lesiones cicatrizales" />
+
+        <CheckBox
+            android:id="@+id/checkbox_lesion_cicatriz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lesión sobre cicatriz" />
+
+        <CheckBox
+            android:id="@+id/checkbox_lesion_hiperqueratosica"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lesión hiperqueratósica" />
+
+        <CheckBox
+            android:id="@+id/checkbox_lesion_queratosica"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lesión Queratósica" />
+
+        <CheckBox
+            android:id="@+id/checkbox_quemaduras"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Quemaduras" />
+
+        <!-- Botón Guardar -->
+        <Button
+            android:id="@+id/boton_guardar_exploracion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GUARDAR"
+            android:backgroundTint="@android:color/holo_green_dark"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="16dp" />
+    </LinearLayout>
+</ScrollView>

@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
         android:text="Paciente: Nombre Apellido"
-        android:textSize="20sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/btnDatosPaciente"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,11 +33,12 @@
     <!-- Botón para los datos del paciente -->
     <Button
         android:id="@+id/btnDatosPaciente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="60dp"
         android:backgroundTint="@color/blue"
         android:text="Datos del paciente"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewTitulo" />
@@ -45,11 +46,12 @@
     <!-- Botón para las primeras pruebas -->
     <Button
         android:id="@+id/btnPrimerasPruebas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="50dp"
         android:backgroundTint="@color/blue"
         android:text="Primeras pruebas"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnDatosPaciente" />
@@ -57,11 +59,12 @@
     <!-- Botón para pruebas dermatólogo -->
     <Button
         android:id="@+id/btnPruebasDermatologo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="50dp"
         android:backgroundTint="@color/blue"
         android:text="Pruebas Dermatólogo"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnPrimerasPruebas" />

@@ -49,16 +49,9 @@ class DetallePacienteActivity : AppCompatActivity() {
         val fechaNacimiento = intent.getStringExtra("FECHA_NACIMIENTO")
         val sexo = intent.getStringExtra("SEXO")
         // Obtener el ID y el nombre del paciente desde el Intent
-        val pacienteId = intent.getStringExtra("PACIENTE_ID")
         val nombre = intent.getStringExtra("NOMBRE") ?: getString(R.string.nombre)
         val apellidos = intent.getStringExtra("APELLIDOS") ?: getString(R.string.apellido)
 
-        // Validar si se recibió el ID del paciente
-        if (pacienteId.isNullOrEmpty()) {
-            Toast.makeText(this, "Error: No se encontró el ID del paciente.", Toast.LENGTH_LONG).show()
-            finish() // Cierra la actividad si no hay un ID válido
-            return
-        }
 
         // Mostrar el nombre y apellidos en el título
         textViewTitulo.text = "${getString(R.string.nombre)}: $nombre $apellidos"
@@ -92,7 +85,6 @@ class DetallePacienteActivity : AppCompatActivity() {
         // Configurar el click para el botón de Primeras Pruebas
         btnPrimerasPruebas.setOnClickListener {
             val intent = Intent(this, PrimerasPruebasActivity::class.java)
-            intent.putExtra("PACIENTE_ID", pacienteId)
             intent.putExtra("NOMBRE", nombre)
             intent.putExtra("APELLIDOS", apellidos)
             intent.putExtra("DNI", dni)
@@ -103,7 +95,6 @@ class DetallePacienteActivity : AppCompatActivity() {
         // Configurar el click para el botón de Pruebas Dermatólogo
         btnPruebasDermatologo.setOnClickListener {
             val intent = Intent(this, PruebasDermatologicasActivity::class.java)
-            intent.putExtra("PACIENTE_ID", pacienteId)
             intent.putExtra("NOMBRE", nombre)
             intent.putExtra("APELLIDOS", apellidos)
             intent.putExtra("DNI", dni)

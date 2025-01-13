@@ -1,8 +1,12 @@
 package com.example.appcancerpiel
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.example.appcancerpiel.R
 
 class DatosPacienteActivity : AppCompatActivity() {
@@ -18,6 +22,14 @@ class DatosPacienteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_datos_paciente)
+
+        // Inicialización de la Toolbar
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true) // Habilitar botón "Atrás"
+            title = "Datos del Paciente"
+        }
 
         // Vincular TextViews con el layout
         textNombre = findViewById(R.id.textNombre)
@@ -45,6 +57,26 @@ class DatosPacienteActivity : AppCompatActivity() {
         textDNI.text = "DNI: $dni"
         textEmail.text = "Email: $email"
         textSexo.text = "Sexo: $sexo"
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_toolbar, menu) // Inflar el menú si existe
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> { // Botón "Atrás" en la Toolbar
+                finish()
+                true
+            }
+            R.id.action_home -> { // Icono de Home en el menú
+                val intent = Intent(this, HomeMedicoActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
 

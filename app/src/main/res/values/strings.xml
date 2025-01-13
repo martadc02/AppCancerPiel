@@ -15,4 +15,16 @@
     <string name="men_principal">Menú Principal</string>
     <string name="title_activity_home_dermatologo">HomeDermatologoActivity</string>
     <string name="title_activity_realizar_historia_clinica">RealizarHistoriaClinicaActivity</string>
+
+    <string name="titulo_pruebas">Solicitud de pruebas</string>
+    <string name="nombre_paciente">Nombre del Paciente</string>
+    <string name="reevaluacion">Reevaluación</string>
+    <string name="iconografia">Iconografía</string>
+    <string name="biopsia">Biopsia</string>
+    <string name="enviar">Enviar</string>
+    <string name="error_paciente_id">Error: No se encontró el ID del paciente.</string>
+    <string name="error_paciente_log">Paciente ID no encontrado</string>
+    <string name="datos_enviados_exito">Datos enviados correctamente.</string>
+
+
 </resources>

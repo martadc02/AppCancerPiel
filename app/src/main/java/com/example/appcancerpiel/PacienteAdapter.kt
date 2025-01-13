@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.appcancerpiel.modelo.Paciente
+import android.util.Log
+
 
 class PacienteAdapter(
     private val listaPacientes: List<Paciente>,
@@ -21,10 +23,12 @@ class PacienteAdapter(
         init {
             itemView.setOnClickListener {
                 val paciente = listaPacientes[adapterPosition] // Obtener el paciente correspondiente al clic
+                Log.i("PacienteAdapter", "Paciente seleccionado: ID=${paciente.id}, Nombre=${paciente.nombre}")
                 onItemClick(paciente) // Llamar al callback para manejar el clic
             }
         }
     }
+
 
     // Inflar el layout item_paciente para cada ítem del RecyclerView
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PacienteViewHolder {

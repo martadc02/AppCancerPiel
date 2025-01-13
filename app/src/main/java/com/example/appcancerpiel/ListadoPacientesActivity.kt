@@ -47,6 +47,7 @@ class ListadoPacientesActivity : AppCompatActivity() {
             val intent = Intent(this, DetallePacienteActivity::class.java)
             intent.putExtra("NOMBRE", paciente.nombre)
             intent.putExtra("APELLIDOS", paciente.apellidos)
+            intent.putExtra("PACIENTE_ID", paciente.id) // Asegúrate de pasar el ID del paciente
             intent.putExtra("EMAIL", paciente.email)
             intent.putExtra("TELEFONO", paciente.telefono)
             intent.putExtra("DNI", paciente.dni)
@@ -55,6 +56,7 @@ class ListadoPacientesActivity : AppCompatActivity() {
 
             startActivity(intent)
         }
+
         recyclerView.adapter = pacienteAdapter
 
         // Inicializar campo de búsqueda
@@ -212,7 +214,12 @@ class ListadoPacientesActivity : AppCompatActivity() {
             .addOnSuccessListener { result ->
                 listaPacientes.clear()
                 for (document in result) {
-                    val paciente = document.toObject(Paciente::class.java)
+                    val paciente = Paciente(
+                        id = document.id, // Asignar el ID del documento al campo id de Paciente
+                        nombre = document.getString("nombre") ?: "Nombre desconocido",
+                        apellidos = document.getString("apellidos") ?: "Apellidos desconocidos",
+                        email = document.getString("email") ?: "Sin correo"
+                    )
                     listaPacientes.add(paciente)
                     Log.i("Paciente", "Asignado: ${paciente.nombre} ${paciente.apellidos}")
                 }

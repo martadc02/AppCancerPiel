@@ -28,8 +28,16 @@ class RealizarHistoriaClinicaActivity : AppCompatActivity() {
         setContentView(R.layout.activity_realizar_historia_clinica)
 
         // Obtener datos del Intent
-        val nombrePaciente = intent.getStringExtra("nombrePaciente") ?: "Paciente"
-        val pacienteId = intent.getStringExtra("pacienteId")
+        val nombre = intent.getStringExtra("NOMBRE")
+        val apellidos = intent.getStringExtra("APELLIDOS")
+        val dni = intent.getStringExtra("DNI")
+
+        // Validar que los datos del Intent no sean nulos
+        if (nombre.isNullOrBlank() || apellidos.isNullOrBlank() || dni.isNullOrBlank()) {
+            Toast.makeText(this, "Error: Datos del paciente no disponibles.", Toast.LENGTH_SHORT).show()
+            finish() // Finalizar la actividad si los datos son inválidos
+            return
+        }
 
         // Inicializar vistas
         colorPiel = findViewById(R.id.color_piel)
@@ -43,15 +51,15 @@ class RealizarHistoriaClinicaActivity : AppCompatActivity() {
         nombrePacienteView = findViewById(R.id.nombre_paciente)
 
         // Mostrar el nombre del paciente
-        nombrePacienteView.text = nombrePaciente
+        nombrePacienteView.text = nombre
 
         // Configurar el botón Guardar
         botonGuardar.setOnClickListener {
-            guardarHistoriaClinica(pacienteId)
+            guardarHistoriaClinica(nombre, apellidos, dni)
         }
     }
 
-    private fun guardarHistoriaClinica(pacienteId: String?) {
+    private fun guardarHistoriaClinica(nombre: String, apellidos: String, dni: String) {
         // Obtener datos ingresados por el usuario
         val colorPielTexto = colorPiel.text.toString()
         val colorPeloTexto = colorPelo.text.toString()
@@ -65,7 +73,9 @@ class RealizarHistoriaClinicaActivity : AppCompatActivity() {
 
         // Crear un mapa con los datos
         val historiaClinica = hashMapOf(
-            "pacienteId" to pacienteId,
+            "nombre" to nombre,
+            "apellidos" to apellidos,
+            "dni" to dni,
             "colorPiel" to colorPielTexto,
             "colorPelo" to colorPeloTexto,
             "colorOjos" to colorOjosTexto,
@@ -87,3 +97,4 @@ class RealizarHistoriaClinicaActivity : AppCompatActivity() {
             }
     }
 }
+

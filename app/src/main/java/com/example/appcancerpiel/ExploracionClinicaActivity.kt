@@ -28,8 +28,16 @@ class ExploracionClinicaActivity : AppCompatActivity() {
         setContentView(R.layout.activity_exploracion_clinica)
 
         // Obtener datos del intent
-        val nombrePaciente = intent.getStringExtra("nombrePaciente") ?: "Paciente"
-        val pacienteId = intent.getStringExtra("pacienteId")
+        val nombre = intent.getStringExtra("NOMBRE")
+        val apellidos = intent.getStringExtra("APELLIDOS")
+        val dni = intent.getStringExtra("DNI")
+
+        // Validar que los datos no sean nulos
+        if (nombre.isNullOrBlank() || apellidos.isNullOrBlank() || dni.isNullOrBlank()) {
+            Toast.makeText(this, "Error: Datos del paciente no disponibles.", Toast.LENGTH_SHORT).show()
+            finish() // Finalizar la actividad si los datos son inválidos
+            return
+        }
 
         // Inicializar vistas
         checkboxLesionesCrecimiento = findViewById(R.id.checkbox_lesiones_crecimiento)
@@ -44,18 +52,20 @@ class ExploracionClinicaActivity : AppCompatActivity() {
         nombrePacienteView = findViewById(R.id.nombre_paciente)
 
         // Mostrar el nombre del paciente
-        nombrePacienteView.text = nombrePaciente
+        nombrePacienteView.text = nombre
 
         // Configurar el botón Guardar
         botonGuardar.setOnClickListener {
-            guardarExploracionClinica(pacienteId)
+            guardarExploracionClinica(nombre, apellidos, dni)
         }
     }
 
-    private fun guardarExploracionClinica(pacienteId: String?) {
+    private fun guardarExploracionClinica(nombre: String, apellidos: String, dni: String) {
         // Crear un mapa con los datos seleccionados
         val exploracion = hashMapOf(
-            "pacienteId" to pacienteId,
+            "nombre" to nombre,
+            "apellidos" to apellidos,
+            "dni" to dni,
             "lesionesCrecimiento" to checkboxLesionesCrecimiento.isChecked,
             "ulceraCuracion" to checkboxUlceraCuracion.isChecked,
             "pustulaHemorragica" to checkboxPustulaHemorragica.isChecked,

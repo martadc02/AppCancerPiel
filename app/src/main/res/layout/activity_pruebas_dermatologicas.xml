@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:gravity="center_horizontal"
+    android:background="@android:color/white">
 
     <!-- Título de la actividad -->
     <TextView
         android:id="@+id/tituloPruebas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Solicitud de pruebas"
+        android:text="@string/titulo_pruebas"
         android:textStyle="bold"
         android:textSize="20sp"
         android:gravity="center"
@@ -18,34 +21,39 @@
 
     <!-- Nombre del paciente -->
     <TextView
-        android:id="@+id/nombrePaciente"
+        android:id="@+id/textViewNombrePaciente"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nombre del Paciente"
+        android:text="@string/nombre_paciente"
         android:textSize="18sp"
         android:gravity="center"
         android:layout_marginBottom="24dp" />
+
 
     <!-- Checkboxes para las pruebas -->
     <CheckBox
         android:id="@+id/checkboxReevaluacion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Reevaluación" />
+        android:text="Reevaluación"
+        android:layout_marginTop="8dp"
+        android:textColor="@android:color/black" />
 
     <CheckBox
         android:id="@+id/checkboxIconografia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Iconografía"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:textColor="@android:color/black" />
 
     <CheckBox
         android:id="@+id/checkboxBiopsia"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Biopsia"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:textColor="@android:color/black" />
 
     <!-- Botón Enviar -->
     <Button
@@ -55,5 +63,6 @@
         android:text="Enviar"
         android:backgroundTint="@color/verde"
         android:textColor="@android:color/white"
-        android:layout_marginTop="32dp" />
+        android:layout_marginTop="32dp"
+        android:padding="12dp" />
 </LinearLayout>

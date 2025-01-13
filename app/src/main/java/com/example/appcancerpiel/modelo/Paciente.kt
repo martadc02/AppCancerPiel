@@ -1,6 +1,7 @@
 package com.example.appcancerpiel.modelo
 
 data class Paciente(
+    val id: String = "", // ID del documento en Firestore
     val nombre: String = "",
     val apellidos: String = "",
     val email: String = "",

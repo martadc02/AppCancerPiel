@@ -30,7 +30,7 @@ class DetallePacienteActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true) // Habilitar botón "Atrás"
-            title = "Detalles" // Título de la Toolbar
+            title = getString(R.string.men_principal) // Título dinámico
         }
 
         textViewTitulo = findViewById(R.id.textViewTitulo)
@@ -42,14 +42,22 @@ class DetallePacienteActivity : AppCompatActivity() {
         btnPrimerasPruebas.visibility = View.GONE
         btnPruebasDermatologo.visibility = View.GONE
 
-        // Obtener el nombre y apellidos del paciente desde el Intent
-        val nombre = intent.getStringExtra("NOMBRE")
-        val apellidos = intent.getStringExtra("APELLIDOS")
+        // Obtener el ID y el nombre del paciente desde el Intent
+        val pacienteId = intent.getStringExtra("PACIENTE_ID")
+        val nombre = intent.getStringExtra("NOMBRE") ?: getString(R.string.nombre)
+        val apellidos = intent.getStringExtra("APELLIDOS") ?: getString(R.string.apellido)
+
+        // Validar si se recibió el ID del paciente
+        if (pacienteId.isNullOrEmpty()) {
+            Toast.makeText(this, "Error: No se encontró el ID del paciente.", Toast.LENGTH_LONG).show()
+            finish() // Cierra la actividad si no hay un ID válido
+            return
+        }
 
         // Mostrar el nombre y apellidos en el título
-        textViewTitulo.text = "Paciente: $nombre $apellidos"
+        textViewTitulo.text = "${getString(R.string.nombre)}: $nombre $apellidos"
 
-        // Obtener el UID del usuario actualmente autenticado
+        // Verificar el rol del usuario autenticado y mostrar botones según el rol
         val auth = FirebaseAuth.getInstance()
         val currentUser = auth.currentUser
 
@@ -61,6 +69,7 @@ class DetallePacienteActivity : AppCompatActivity() {
         // Configurar el click para el botón de Primeras Pruebas
         btnPrimerasPruebas.setOnClickListener {
             val intent = Intent(this, PrimerasPruebasActivity::class.java)
+            intent.putExtra("PACIENTE_ID", pacienteId)
             intent.putExtra("NOMBRE", nombre)
             intent.putExtra("APELLIDOS", apellidos)
             startActivity(intent)
@@ -69,6 +78,7 @@ class DetallePacienteActivity : AppCompatActivity() {
         // Configurar el click para el botón de Pruebas Dermatólogo
         btnPruebasDermatologo.setOnClickListener {
             val intent = Intent(this, PruebasDermatologicasActivity::class.java)
+            intent.putExtra("PACIENTE_ID", pacienteId)
             intent.putExtra("NOMBRE", nombre)
             intent.putExtra("APELLIDOS", apellidos)
             startActivity(intent)

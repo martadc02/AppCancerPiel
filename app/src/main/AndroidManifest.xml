@@ -45,6 +45,9 @@
             android:name=".DetallePacienteActivity"
             android:exported="false" />
         <activity
+            android:name=".DatosPacienteActivity"
+            android:exported="false" />
+        <activity
             android:name=".HomeDermatologoActivity"
             android:exported="false"
             android:label="@string/title_activity_home_dermatologo"

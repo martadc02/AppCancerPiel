@@ -48,6 +48,12 @@ class ListadoPacientesActivity : AppCompatActivity() {
             intent.putExtra("NOMBRE", paciente.nombre)
             intent.putExtra("APELLIDOS", paciente.apellidos)
             intent.putExtra("PACIENTE_ID", paciente.id) // Asegúrate de pasar el ID del paciente
+            intent.putExtra("EMAIL", paciente.email)
+            intent.putExtra("TELEFONO", paciente.telefono)
+            intent.putExtra("DNI", paciente.dni)
+            intent.putExtra("FECHA_NACIMIENTO", paciente.fechaNacimiento)
+            intent.putExtra("SEXO", paciente.sexo)
+
             startActivity(intent)
         }
 

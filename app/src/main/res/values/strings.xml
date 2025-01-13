@@ -25,6 +25,7 @@
     <string name="error_paciente_id">Error: No se encontró el ID del paciente.</string>
     <string name="error_paciente_log">Paciente ID no encontrado</string>
     <string name="datos_enviados_exito">Datos enviados correctamente.</string>
+    <string name="titulo_biopsia">Biopsia</string>
 
 
 </resources>

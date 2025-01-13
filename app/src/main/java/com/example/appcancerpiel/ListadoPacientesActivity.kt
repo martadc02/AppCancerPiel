@@ -47,6 +47,12 @@ class ListadoPacientesActivity : AppCompatActivity() {
             val intent = Intent(this, DetallePacienteActivity::class.java)
             intent.putExtra("NOMBRE", paciente.nombre)
             intent.putExtra("APELLIDOS", paciente.apellidos)
+            intent.putExtra("EMAIL", paciente.email)
+            intent.putExtra("TELEFONO", paciente.telefono)
+            intent.putExtra("DNI", paciente.dni)
+            intent.putExtra("FECHA_NACIMIENTO", paciente.fechaNacimiento)
+            intent.putExtra("SEXO", paciente.sexo)
+
             startActivity(intent)
         }
         recyclerView.adapter = pacienteAdapter

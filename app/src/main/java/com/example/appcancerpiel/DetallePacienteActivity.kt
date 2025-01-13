@@ -45,6 +45,11 @@ class DetallePacienteActivity : AppCompatActivity() {
         // Obtener el nombre y apellidos del paciente desde el Intent
         val nombre = intent.getStringExtra("NOMBRE")
         val apellidos = intent.getStringExtra("APELLIDOS")
+        val email = intent.getStringExtra("EMAIL")
+        val telefono = intent.getStringExtra("TELEFONO")
+        val dni = intent.getStringExtra("DNI")
+        val fechaNacimiento = intent.getStringExtra("FECHA_NACIMIENTO")
+        val sexo = intent.getStringExtra("SEXO")
 
         // Mostrar el nombre y apellidos en el título
         textViewTitulo.text = "Paciente: $nombre $apellidos"
@@ -57,6 +62,23 @@ class DetallePacienteActivity : AppCompatActivity() {
             val uid = currentUser.uid
             verificarRolYMostrarBotones(uid)
         }
+
+        // Botón Datos del paciente
+
+        btnDatosPaciente.setOnClickListener {
+            val intent = Intent(this, DatosPacienteActivity::class.java)
+            intent.putExtra("NOMBRE", nombre)        // Envía el nombre
+            intent.putExtra("APELLIDOS", apellidos)  // Envía los apellidos
+            intent.putExtra("EMAIL", email)          // Envía el email
+            intent.putExtra("TELEFONO", telefono)    // Envía el teléfono
+            intent.putExtra("DNI", dni)              // Envía el DNI
+            intent.putExtra("FECHA_NACIMIENTO", fechaNacimiento) // Envía la fecha de nacimiento
+            intent.putExtra("SEXO", sexo)            // Envía el sexo
+
+            // Inicia la actividad DatosPacienteActivity
+            startActivity(intent)
+        }
+
 
         // Configurar el click para el botón de Primeras Pruebas
         btnPrimerasPruebas.setOnClickListener {

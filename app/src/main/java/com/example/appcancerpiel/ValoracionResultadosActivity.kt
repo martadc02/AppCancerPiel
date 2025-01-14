@@ -5,7 +5,6 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Query
 
 class ValoracionResultadosActivity : AppCompatActivity() {
 
@@ -24,56 +23,40 @@ class ValoracionResultadosActivity : AppCompatActivity() {
         btnTratamientoMedico = findViewById(R.id.btnTratamientoMedico)
         btnCirugia = findViewById(R.id.btnCirugia)
 
-        // Obtener datos del Intent (nombre y apellido del paciente)
-        val nombrePaciente = intent.getStringExtra("NOMBRE_PACIENTE")
-        val apellidoPaciente = intent.getStringExtra("APELLIDO_PACIENTE")
+        // Obtener datos del Intent (ID, nombre y apellido del paciente)
+        val pacienteId = intent.getStringExtra("PACIENTE_ID") ?: ""
+        val nombrePaciente = intent.getStringExtra("NOMBRE") ?: "Nombre no disponible"
+        val apellidoPaciente = intent.getStringExtra("APELLIDOS") ?: "Apellidos no disponibles"
 
-        if (nombrePaciente.isNullOrEmpty() || apellidoPaciente.isNullOrEmpty()) {
-            Toast.makeText(this, "Error: Nombre y apellido del paciente no encontrados.", Toast.LENGTH_SHORT).show()
+        if (pacienteId.isEmpty()) {
+            Toast.makeText(this, "Error: ID del paciente no encontrado.", Toast.LENGTH_SHORT).show()
             finish() // Finaliza la actividad si no se encuentra la información del paciente
             return
         }
 
         // Configurar acciones de los botones
         btnCuidadosPaliativos.setOnClickListener {
-            guardarCuidadosPaliativos(nombrePaciente, apellidoPaciente)
+            actualizarEstadoPaciente(pacienteId, "Cuidados Paliativos")
         }
 
         btnTratamientoMedico.setOnClickListener {
-            Toast.makeText(this, "Seleccionado: Tratamiento Médico", Toast.LENGTH_SHORT).show()
+            actualizarEstadoPaciente(pacienteId, "Tratamiento Médico")
         }
 
         btnCirugia.setOnClickListener {
-            Toast.makeText(this, "Seleccionado: Cirugía", Toast.LENGTH_SHORT).show()
+            actualizarEstadoPaciente(pacienteId, "Cirugía")
         }
     }
 
-    private fun guardarCuidadosPaliativos(nombre: String, apellido: String) {
-        // Buscar el paciente por nombre y apellido
-        db.collection("Pacientes")
-            .whereEqualTo("nombre", nombre)
-            .whereEqualTo("apellido", apellido)
-            .get()
-            .addOnSuccessListener { documents ->
-                if (documents.isEmpty) {
-                    Toast.makeText(this, "Paciente no encontrado.", Toast.LENGTH_SHORT).show()
-                    return@addOnSuccessListener
-                }
-
-                // Actualizar el primer documento encontrado (debe haber un único documento por nombre y apellido)
-                for (document in documents) {
-                    db.collection("Pacientes").document(document.id)
-                        .update("estado", "Cuidados Paliativos", "fecha", System.currentTimeMillis())
-                        .addOnSuccessListener {
-                            Toast.makeText(this, "Estado actualizado a Cuidados Paliativos.", Toast.LENGTH_SHORT).show()
-                        }
-                        .addOnFailureListener { e ->
-                            Toast.makeText(this, "Error al guardar: ${e.message}", Toast.LENGTH_SHORT).show()
-                        }
-                }
+    private fun actualizarEstadoPaciente(pacienteId: String, estado: String) {
+        // Actualizar el estado del paciente en la base de datos
+        db.collection("Pacientes").document(pacienteId)
+            .update("estado", estado, "fecha", System.currentTimeMillis())
+            .addOnSuccessListener {
+                Toast.makeText(this, "Estado actualizado a $estado.", Toast.LENGTH_SHORT).show()
             }
             .addOnFailureListener { e ->
-                Toast.makeText(this, "Error al buscar paciente: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Error al actualizar el estado: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
 }

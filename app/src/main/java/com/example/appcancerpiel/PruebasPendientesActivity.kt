@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import android.util.Log
+
 
 class PruebasPendientesActivity : AppCompatActivity() {
 
-    private lateinit var botonReevaluacion: Button
-    private lateinit var botonIconografia: Button
     private lateinit var botonBiopsia: Button
     private lateinit var botonValoracionResultados: Button
 
@@ -18,39 +18,38 @@ class PruebasPendientesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_pruebas_pendientes)
 
         // Inicialización de vistas
-        botonReevaluacion = findViewById(R.id.botonReevaluacion)
-        botonIconografia = findViewById(R.id.botonIconografia)
         botonBiopsia = findViewById(R.id.botonBiopsia)
         botonValoracionResultados = findViewById(R.id.botonValoracionResultados)
 
         // Obtener los datos pasados desde la actividad previa
-        val reevaluacion = intent.getBooleanExtra("Reevaluacion", false)
-        val iconografia = intent.getBooleanExtra("Iconografia", false)
         val biopsia = intent.getBooleanExtra("Biopsia", false)
         val valoracionResultados = intent.getBooleanExtra("ValoracionResultados", false)
+        val pacienteId = intent.getStringExtra("PACIENTE_ID") ?: ""
+        val nombre = intent.getStringExtra("NOMBRE") ?: "Nombre no disponible"
+        val apellidos = intent.getStringExtra("APELLIDOS") ?: "Apellidos no disponibles"
 
         // Configurar visibilidad de los botones según las pruebas seleccionadas
-        botonReevaluacion.visibility = if (reevaluacion) View.VISIBLE else View.GONE
-        botonIconografia.visibility = if (iconografia) View.VISIBLE else View.GONE
         botonBiopsia.visibility = if (biopsia) View.VISIBLE else View.GONE
         botonValoracionResultados.visibility = if (valoracionResultados) View.VISIBLE else View.GONE
 
         // Configurar acciones de los botones
-        botonReevaluacion.setOnClickListener {
-            // Acción para Reevaluación
-        }
-
-        botonIconografia.setOnClickListener {
-            // Acción para Iconografía
-        }
-
         botonBiopsia.setOnClickListener {
             val intent = Intent(this, BiopsiaActivity::class.java)
+            intent.putExtra("PACIENTE_ID", pacienteId)
+            intent.putExtra("NOMBRE", nombre)
+            intent.putExtra("APELLIDOS", apellidos)
             startActivity(intent)
         }
 
         botonValoracionResultados.setOnClickListener {
+            // Añade este log para verificar los valores
+            Log.i("PruebasPendientesActivity", "Nombre: $nombre, Apellidos: $apellidos, ID: $pacienteId")
+
+            // Configurar el intent para iniciar ValoracionResultadosActivity
             val intent = Intent(this, ValoracionResultadosActivity::class.java)
+            intent.putExtra("PACIENTE_ID", pacienteId)
+            intent.putExtra("NOMBRE", nombre)
+            intent.putExtra("APELLIDOS", apellidos)
             startActivity(intent)
         }
     }

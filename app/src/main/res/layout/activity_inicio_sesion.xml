@@ -23,18 +23,18 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="216dp"
         android:text="INICIO DE SESIÓN"
-        android:textSize="20sp"
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/editEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
 
     <EditText
         android:id="@+id/editEmail"
         android:layout_width="250dp"
         android:layout_height="55dp"
-        android:layout_marginTop="256dp"
+        android:layout_marginTop="80dp"
         android:layout_marginBottom="14dp"
         android:ems="10"
         android:hint="@string/email"
@@ -43,13 +43,13 @@
         app:layout_constraintBottom_toTopOf="@+id/editPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
 
     <EditText
         android:id="@+id/editPassword"
         android:layout_width="250dp"
         android:layout_height="55dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="30dp"
         android:ems="10"
         android:hint="@string/contraseña"
         android:inputType="textPassword"
@@ -62,11 +62,11 @@
         android:id="@+id/buttonIniciarSesion"
         android:layout_width="250dp"
         android:layout_height="52dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="12dp"
         android:backgroundTint="@color/morado_oscuro"
         android:text="Iniciar Sesión"
         android:textColor="@color/black"
-        android:textSize="16dp"
+        android:textSize="18dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonCambioSesion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -75,13 +75,13 @@
         android:id="@+id/buttonCambioSesion"
         android:layout_width="250dp"
         android:layout_height="52dp"
-        android:layout_marginBottom="204dp"
+        android:layout_marginBottom="30dp"
         android:backgroundTint="@color/morado_claro"
         android:onClick="onClickTipo"
         android:text="Cambiar de perfil"
         android:textColor="@color/black"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

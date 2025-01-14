@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Datos de la persona -->
+    <TextView
+        android:id="@+id/tvNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre: "
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvApellidos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Apellidos: "
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvDni"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DNI: "
+        android:textSize="18sp" />
+
+    <!-- Datos de la exploración clínica -->
+    <TextView
+        android:id="@+id/tvLesionCicatriz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lesión Cicatriz: "
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvLesionHiperqueratosica"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lesión Hiperqueratósica: "
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvLesionQueratocica"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lesión Queratósica: "
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvLesionesCicatrizales"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lesiones Cicatrizales: "
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvLesionesCrecimiento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lesiones de Crecimiento: "
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvPustulaHemorragica"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pústula Hemorrágica: "
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvQuemaduras"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quemaduras: "
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvUlcerasCuracion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Úlceras en Curación: "
+        android:textSize="16sp" />
+</LinearLayout>

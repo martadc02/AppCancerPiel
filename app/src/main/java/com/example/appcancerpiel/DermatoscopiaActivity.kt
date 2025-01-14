@@ -23,8 +23,16 @@ class DermatoscopiaActivity : AppCompatActivity() {
         setContentView(R.layout.activity_dermatoscopia)
 
         // Obtener datos del intent
-        val nombrePaciente = intent.getStringExtra("nombrePaciente") ?: "Paciente"
-        val pacienteId = intent.getStringExtra("pacienteId")
+        val nombre = intent.getStringExtra("NOMBRE")
+        val apellidos = intent.getStringExtra("APELLIDOS")
+        val dni = intent.getStringExtra("DNI")
+
+        // Validar que los datos no sean nulos
+        if (nombre.isNullOrBlank() || apellidos.isNullOrBlank() || dni.isNullOrBlank()) {
+            Toast.makeText(this, "Error: Datos del paciente no disponibles.", Toast.LENGTH_SHORT).show()
+            finish() // Finalizar la actividad si los datos son inválidos
+            return
+        }
 
         // Inicializar vistas
         checkboxCarcinomaPigmentado = findViewById(R.id.checkbox_carcinoma_pigmentado)
@@ -34,18 +42,20 @@ class DermatoscopiaActivity : AppCompatActivity() {
         nombrePacienteView = findViewById(R.id.nombre_paciente)
 
         // Mostrar el nombre del paciente
-        nombrePacienteView.text = nombrePaciente
+        nombrePacienteView.text = nombre
 
         // Configurar el botón Guardar
         botonGuardar.setOnClickListener {
-            guardarDermatoscopia(pacienteId)
+            guardarDermatoscopia(nombre, apellidos, dni)
         }
     }
 
-    private fun guardarDermatoscopia(pacienteId: String?) {
+    private fun guardarDermatoscopia(nombre: String, apellidos: String, dni: String) {
         // Crear mapa con los datos seleccionados
         val dermatoscopia = hashMapOf(
-            "pacienteId" to pacienteId,
+            "nombre" to nombre,
+            "apellidos" to apellidos,
+            "dni" to dni,
             "carcinomaPigmentado" to checkboxCarcinomaPigmentado.isChecked,
             "carcinomaNoPigmentado" to checkboxCarcinomaNoPigmentado.isChecked,
             "carcinomaCelEscamosa" to checkboxCarcinomaCelEscamosa.isChecked
@@ -63,3 +73,5 @@ class DermatoscopiaActivity : AppCompatActivity() {
             }
     }
 }
+
+

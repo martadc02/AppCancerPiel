@@ -95,6 +95,8 @@ class DetallePacienteActivity : AppCompatActivity() {
             intent.putExtra("PACIENTE_ID", pacienteId)
             intent.putExtra("NOMBRE", nombre)
             intent.putExtra("APELLIDOS", apellidos)
+            intent.putExtra("DNI", dni)
+
             startActivity(intent)
         }
 
@@ -104,6 +106,7 @@ class DetallePacienteActivity : AppCompatActivity() {
             intent.putExtra("PACIENTE_ID", pacienteId)
             intent.putExtra("NOMBRE", nombre)
             intent.putExtra("APELLIDOS", apellidos)
+            intent.putExtra("DNI", dni)
             startActivity(intent)
         }
     }
@@ -135,7 +138,7 @@ class DetallePacienteActivity : AppCompatActivity() {
                 if (document.exists()) {
                     val tipo = document.getString("tipo")
                     if (tipo == "Dermatólogo") {
-                        btnPrimerasPruebas.visibility = View.GONE
+                        btnPrimerasPruebas.visibility = View.VISIBLE
                         btnPruebasDermatologo.visibility = View.VISIBLE
                     } else if (tipo == "Médico de Familia") {
                         btnPrimerasPruebas.visibility = View.VISIBLE

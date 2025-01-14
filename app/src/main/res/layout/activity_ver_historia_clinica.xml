@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Datos de la persona -->
+    <TextView
+        android:id="@+id/tvNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre: "
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvApellidos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Apellidos: "
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvDni"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DNI: "
+        android:textSize="18sp" />
+
+    <!-- Datos de la historia clínica -->
+    <TextView
+        android:id="@+id/tvColorOjos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Color de ojos: "
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvColorPelo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Color de pelo: "
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvColorPiel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Color de piel: "
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvConsumoAlcohol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Consumo de alcohol: "
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvConsumoTabaco"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Consumo de tabaco: "
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvExposicionSolar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Exposición solar: "
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvRadiacionesIonizantes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Radiaciones ionizantes: "
+        android:textSize="16sp" />
+</LinearLayout>

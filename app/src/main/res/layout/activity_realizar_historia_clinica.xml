@@ -1,85 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:background="@color/blue"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:titleTextColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Nombre del Paciente -->
-        <TextView
-            android:id="@+id/nombre_paciente"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nombre del Paciente"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_marginBottom="16dp"
-            android:textSize="18sp" />
+    <!-- Nombre del Paciente -->
+    <TextView
+        android:id="@+id/nombre_paciente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:gravity="center"
+        android:text="Nombre del Paciente"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-        <!-- Campo Color de Piel -->
-        <EditText
-            android:id="@+id/color_piel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Color de Piel"
-            android:inputType="text" />
+    <!-- Campo Color de Piel -->
+    <EditText
+        android:id="@+id/color_piel"
+        android:layout_width="335dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:hint="Color de Piel"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nombre_paciente" />
 
-        <!-- Campo Color de Pelo -->
-        <EditText
-            android:id="@+id/color_pelo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Color de Pelo"
-            android:inputType="text"
-            android:layout_marginTop="8dp" />
+    <!-- Campo Color de Pelo -->
+    <EditText
+        android:id="@+id/color_pelo"
+        android:layout_width="335dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:hint="Color de Pelo"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/color_piel" />
 
-        <!-- Campo Color de Ojos -->
-        <EditText
-            android:id="@+id/color_ojos"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Color de Ojos"
-            android:inputType="text"
-            android:layout_marginTop="8dp" />
+    <!-- Campo Color de Ojos -->
+    <EditText
+        android:id="@+id/color_ojos"
+        android:layout_width="335dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:hint="Color de Ojos"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/color_pelo" />
 
-        <!-- Checkboxes -->
-        <CheckBox
-            android:id="@+id/checkbox_exposicion_solar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Exposición solar"
-            android:layout_marginTop="16dp" />
+    <!-- Checkboxes -->
+    <CheckBox
+        android:id="@+id/checkbox_exposicion_solar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="15dp"
+        android:text="Exposición solar"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/color_ojos" />
 
-        <CheckBox
-            android:id="@+id/checkbox_radiaciones_ionizantes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Radiaciones ionizantes" />
+    <CheckBox
+        android:id="@+id/checkbox_radiaciones_ionizantes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="15dp"
+        android:text="Radiaciones ionizantes"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_exposicion_solar" />
 
-        <CheckBox
-            android:id="@+id/checkbox_consumo_alcohol"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Consumo frecuente alcohol" />
+    <CheckBox
+        android:id="@+id/checkbox_consumo_alcohol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="15dp"
+        android:text="Consumo frecuente alcohol"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_radiaciones_ionizantes" />
 
-        <CheckBox
-            android:id="@+id/checkbox_consumo_tabaco"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Consumo frecuente tabaco" />
+    <CheckBox
+        android:id="@+id/checkbox_consumo_tabaco"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="15dp"
+        android:text="Consumo frecuente tabaco"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_consumo_alcohol" />
 
-        <!-- Botón Guardar -->
-        <Button
-            android:id="@+id/boton_guardar_historia"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="GUARDAR"
-            android:backgroundTint="@android:color/holo_green_dark"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="16dp" />
-    </LinearLayout>
-</ScrollView>
+    <!-- Botón Guardar -->
+    <Button
+        android:id="@+id/boton_guardar_historia"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="@color/verde"
+        android:text="GUARDAR"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_consumo_tabaco" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

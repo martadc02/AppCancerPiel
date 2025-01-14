@@ -1,11 +1,15 @@
 package com.example.appcancerpiel
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.google.firebase.firestore.FirebaseFirestore
 
 class EleccionDermatologoActivity : AppCompatActivity() {
@@ -20,6 +24,14 @@ class EleccionDermatologoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_eleccion_dermatologo)
+
+        // Inicialización de la Toolbar
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true) // Habilitar botón "Atrás"
+            title = getString(R.string.men_principal) // Título dinámico
+        }
 
         // Inicializar vistas
         spinnerDermatologos = findViewById(R.id.spinnerDermatologos)
@@ -103,5 +115,25 @@ class EleccionDermatologoActivity : AppCompatActivity() {
             .addOnFailureListener { e ->
                 Toast.makeText(this, "Error al buscar paciente: ${e.message}", Toast.LENGTH_SHORT).show()
             }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_toolbar, menu) // Inflar el menú si existe
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> { // Botón "Atrás" en la Toolbar
+                finish()
+                true
+            }
+            R.id.action_home -> { // Icono de Home en el menú
+                val intent = Intent(this, HomeMedicoActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

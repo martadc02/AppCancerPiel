@@ -44,9 +44,7 @@
             android:exported="false" />
         <activity
             android:name=".RealizarHistoriaClinicaActivity"
-            android:exported="false"
-            android:label="@string/title_activity_realizar_historia_clinica"
-            android:theme="@style/Theme.AppCancerPiel" />
+            android:exported="false"/>
         <activity
             android:name=".PrimerasPruebasActivity"
             android:exported="false" />

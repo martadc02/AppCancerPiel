@@ -1,52 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:background="@color/blue"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:titleTextColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Nombre del paciente -->
-        <TextView
-            android:id="@+id/nombre_paciente"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nombre del Paciente"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_marginBottom="16dp"
-            android:textSize="18sp" />
+    <!-- Nombre del Paciente -->
+    <TextView
+        android:id="@+id/nombre_paciente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:text="Nombre del Paciente"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-        <!-- Opciones de Dermatoscopia -->
-        <CheckBox
-            android:id="@+id/checkbox_carcinoma_pigmentado"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Carcinoma pigmentado" />
+    <!-- Checkboxes -->
+    <CheckBox
+        android:id="@+id/checkbox_carcinoma_pigmentado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="40dp"
+        android:text="Carcinoma pigmentado"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nombre_paciente" />
 
-        <CheckBox
-            android:id="@+id/checkbox_carcinoma_no_pigmentado"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Carcinoma no pigmentado" />
+    <CheckBox
+        android:id="@+id/checkbox_carcinoma_no_pigmentado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="25dp"
+        android:text="Carcinoma no pigmentado"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_carcinoma_pigmentado" />
 
-        <CheckBox
-            android:id="@+id/checkbox_carcinoma_cel_escamosa"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Carcinoma Cel Escamosa" />
+    <CheckBox
+        android:id="@+id/checkbox_carcinoma_cel_escamosa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="25dp"
+        android:text="Carcinoma Cel Escamosa"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_carcinoma_no_pigmentado" />
 
-        <!-- Botón Guardar -->
-        <Button
-            android:id="@+id/boton_guardar_dermatoscopia"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="GUARDAR"
-            android:backgroundTint="@android:color/holo_green_dark"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="16dp" />
-    </LinearLayout>
-</ScrollView>
+    <!-- Botón Guardar -->
+    <Button
+        android:id="@+id/boton_guardar_dermatoscopia"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="@color/verde"
+        android:text="GUARDAR"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_carcinoma_cel_escamosa" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

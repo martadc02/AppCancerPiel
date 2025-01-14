@@ -1,11 +1,15 @@
 package com.example.appcancerpiel
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.google.firebase.firestore.FirebaseFirestore
 
 class DermatoscopiaActivity : AppCompatActivity() {
@@ -22,17 +26,19 @@ class DermatoscopiaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dermatoscopia)
 
+        // Inicialización de la Toolbar
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true) // Habilitar botón "Atrás"
+            title = "Rellenar Dermatoscopia"
+        }
+
         // Obtener datos del intent
         val nombre = intent.getStringExtra("NOMBRE")
         val apellidos = intent.getStringExtra("APELLIDOS")
         val dni = intent.getStringExtra("DNI")
 
-        // Validar que los datos no sean nulos
-        if (nombre.isNullOrBlank() || apellidos.isNullOrBlank() || dni.isNullOrBlank()) {
-            Toast.makeText(this, "Error: Datos del paciente no disponibles.", Toast.LENGTH_SHORT).show()
-            finish() // Finalizar la actividad si los datos son inválidos
-            return
-        }
 
         // Inicializar vistas
         checkboxCarcinomaPigmentado = findViewById(R.id.checkbox_carcinoma_pigmentado)
@@ -42,11 +48,12 @@ class DermatoscopiaActivity : AppCompatActivity() {
         nombrePacienteView = findViewById(R.id.nombre_paciente)
 
         // Mostrar el nombre del paciente
-        nombrePacienteView.text = nombre
+        nombrePacienteView.text = "$nombre $apellidos"
+
 
         // Configurar el botón Guardar
         botonGuardar.setOnClickListener {
-            guardarDermatoscopia(nombre, apellidos, dni)
+            guardarDermatoscopia(nombre.toString(), apellidos.toString(), dni.toString())
         }
     }
 
@@ -71,6 +78,26 @@ class DermatoscopiaActivity : AppCompatActivity() {
             .addOnFailureListener { e ->
                 Toast.makeText(this, "Error al guardar: ${e.message}", Toast.LENGTH_SHORT).show()
             }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_toolbar, menu) // Inflar el menú si existe
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> { // Botón "Atrás" en la Toolbar
+                finish()
+                true
+            }
+            R.id.action_home -> { // Icono de Home en el menú
+                val intent = Intent(this, HomeMedicoActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
 

@@ -1,82 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:background="@color/blue"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@android:color/white" />
 
-        <!-- Nombre del paciente -->
-        <TextView
-            android:id="@+id/nombre_paciente"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nombre del Paciente"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_marginBottom="16dp"
-            android:textSize="18sp" />
+    <!-- Nombre del Paciente -->
+    <TextView
+        android:id="@+id/nombre_paciente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:gravity="center"
+        android:text="Nombre del Paciente"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-        <!-- Opciones de exploración -->
-        <CheckBox
-            android:id="@+id/checkbox_lesiones_crecimiento"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Lesiones crecimiento prog." />
+    <!-- Opciones de exploración -->
+    <CheckBox
+        android:id="@+id/checkbox_lesiones_crecimiento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="20dp"
+        android:text="Lesiones crecimiento prog."
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nombre_paciente" />
 
-        <CheckBox
-            android:id="@+id/checkbox_ulcera_curacion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Úlcera sin tendencia a curación" />
+    <CheckBox
+        android:id="@+id/checkbox_ulcera_curacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="12dp"
+        android:text="Úlcera sin tendencia a curación"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_lesiones_crecimiento" />
 
-        <CheckBox
-            android:id="@+id/checkbox_pustula_hemorragica"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Pústula hemorrágica" />
+    <CheckBox
+        android:id="@+id/checkbox_pustula_hemorragica"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="12dp"
+        android:text="Pústula hemorrágica"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_ulcera_curacion" />
 
-        <CheckBox
-            android:id="@+id/checkbox_lesiones_cicatrizales"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Lesiones cicatrizales" />
+    <CheckBox
+        android:id="@+id/checkbox_lesiones_cicatrizales"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="12dp"
+        android:text="Lesiones cicatrizales"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_pustula_hemorragica" />
 
-        <CheckBox
-            android:id="@+id/checkbox_lesion_cicatriz"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Lesión sobre cicatriz" />
+    <CheckBox
+        android:id="@+id/checkbox_lesion_cicatriz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="12dp"
+        android:text="Lesión sobre cicatriz"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_lesiones_cicatrizales" />
 
-        <CheckBox
-            android:id="@+id/checkbox_lesion_hiperqueratosica"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Lesión hiperqueratósica" />
+    <CheckBox
+        android:id="@+id/checkbox_lesion_hiperqueratosica"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="12dp"
+        android:text="Lesión hiperqueratósica"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_lesion_cicatriz" />
 
-        <CheckBox
-            android:id="@+id/checkbox_lesion_queratosica"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Lesión Queratósica" />
+    <CheckBox
+        android:id="@+id/checkbox_lesion_queratosica"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="15dp"
+        android:text="Lesión Queratósica"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_lesion_hiperqueratosica" />
 
-        <CheckBox
-            android:id="@+id/checkbox_quemaduras"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Quemaduras" />
+    <CheckBox
+        android:id="@+id/checkbox_quemaduras"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="12dp"
+        android:text="Quemaduras"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_lesion_queratosica" />
 
-        <!-- Botón Guardar -->
-        <Button
-            android:id="@+id/boton_guardar_exploracion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="GUARDAR"
-            android:backgroundTint="@android:color/holo_green_dark"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="16dp" />
-    </LinearLayout>
-</ScrollView>
+    <!-- Botón Guardar -->
+    <Button
+        android:id="@+id/boton_guardar_exploracion"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="@color/verde"
+        android:text="GUARDAR"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/checkbox_quemaduras" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

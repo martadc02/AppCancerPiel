@@ -48,9 +48,8 @@ class DetallePacienteActivity : AppCompatActivity() {
         val dni = intent.getStringExtra("DNI")
         val fechaNacimiento = intent.getStringExtra("FECHA_NACIMIENTO")
         val sexo = intent.getStringExtra("SEXO")
-        // Obtener el ID y el nombre del paciente desde el Intent
-        val nombre = intent.getStringExtra("NOMBRE") ?: getString(R.string.nombre)
-        val apellidos = intent.getStringExtra("APELLIDOS") ?: getString(R.string.apellido)
+        val nombre = intent.getStringExtra("NOMBRE")
+        val apellidos = intent.getStringExtra("APELLIDOS")
 
 
         // Mostrar el nombre y apellidos en el título

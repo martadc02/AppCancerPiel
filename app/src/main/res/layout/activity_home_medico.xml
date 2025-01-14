@@ -28,10 +28,11 @@
         android:id="@+id/btnListadoPacientes"
         android:layout_width="250dp"
         android:layout_height="60dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="60dp"
         android:backgroundTint="@color/blue"
         android:text="Listado de pacientes"
         android:textColor="@android:color/white"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewHeader" />
@@ -44,6 +45,7 @@
         android:backgroundTint="@color/blue"
         android:text="Cerrar Sesión"
         android:textColor="@android:color/white"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnListadoPacientes" />
